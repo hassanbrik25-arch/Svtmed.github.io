@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laboratoire virtuel SVT, 1re Bac Sciences expérimentales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&display=swap" rel="stylesheet">
+<style>
+:root{--body:'Atkinson Hyperlegible',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--disp:'Bricolage Grotesque','Atkinson Hyperlegible',system-ui,sans-serif;--fs:17px;
+--bg:#EEF2F0;--surface:#FFFFFF;--ink:#15262A;--muted:#566A6C;--line:#D2DCD8;--soft:#E3EBE7;
+--u1:#9C5A16;--u2:#1D7447;--u3:#4541A0;--onu:#FFFFFF;--hot:#B83227;
+--g1:#EAD9B0;--g2:#D6B98A;--g3:#B98E5F;--g4:#BFCDD0;--g5:#EFEBDD;--water:#D3E8EF;--turb:#B79B72;--dark:#3B4046;--sol:#DCCFEE;--antho:#9C2A6B;--rbc:#C94A45;--rbcl:#E5938C;--guard:#BFE0B8;--cell:#F3F6EE;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10181A;--surface:#182226;--ink:#E4ECEA;--muted:#9BAFAD;--line:#2D3B3F;--soft:#213035;--u1:#E39B55;--u2:#5DC08B;--u3:#A09DF2;--onu:#0E1618;--hot:#FF8A7A;--g1:#8A7650;--g2:#7A6245;--g3:#654C35;--g4:#50626A;--g5:#77746A;--water:#1E3A46;--turb:#8C7550;--dark:#B7BEC3;--sol:#4A3F66;--antho:#D0569B;--rbc:#D9635E;--rbcl:#8E3A36;--guard:#3F6B45;--cell:#1F2B2F}}
+:root[data-theme="dark"]{--bg:#10181A;--surface:#182226;--ink:#E4ECEA;--muted:#9BAFAD;--line:#2D3B3F;--soft:#213035;--u1:#E39B55;--u2:#5DC08B;--u3:#A09DF2;--onu:#0E1618;--hot:#FF8A7A;--g1:#8A7650;--g2:#7A6245;--g3:#654C35;--g4:#50626A;--g5:#77746A;--water:#1E3A46;--turb:#8C7550;--dark:#B7BEC3;--sol:#4A3F66;--antho:#D0569B;--rbc:#D9635E;--rbcl:#8E3A36;--guard:#3F6B45;--cell:#1F2B2F}
+html{font-size:var(--fs);scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+html.big{--fs:21px}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--u3);outline-offset:2px}
+.top{display:flex;align-items:center;gap:10px 14px;padding:10px 20px;border-bottom:1px solid var(--line);background:var(--surface);flex-wrap:wrap}
+.brand{margin-right:auto;background:none;border:0;padding:4px 0;text-align:left;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:1.15rem;line-height:1.2}
+.brand small{display:block;font-family:var(--body);font-weight:400;font-size:.78rem;color:var(--muted)}
+.tb{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 12px;font-size:.88rem;cursor:pointer}
+.tb[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.menu{display:none}
+.wrap{display:grid;grid-template-columns:300px minmax(0,1fr)}
+aside{border-right:1px solid var(--line);background:var(--surface);position:sticky;top:env(safe-area-inset-top,0px);align-self:start;max-height:100dvh;overflow:auto;padding:14px 12px 40px}
+aside input{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);font-size:.92rem}
+.keyl{font-size:.78rem;color:var(--muted);margin:8px 6px 0;display:flex;gap:14px;flex-wrap:wrap}
+.keyl span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--u2);display:inline-block;flex:none}
+.dot.st{background:none;border:1.5px solid var(--u2)}
+.uh{font-family:var(--disp);font-weight:700;font-size:.95rem;line-height:1.25;margin:20px 6px 4px;padding-left:10px;border-left:4px solid var(--uc)}
+.uh span{font-family:var(--body);font-weight:400;font-size:.8rem;color:var(--muted)}
+.ch{font-size:.8rem;color:var(--muted);margin:12px 6px 2px 14px;font-style:italic}
+.it{display:flex;gap:9px;width:100%;text-align:left;background:none;border:0;border-radius:6px;padding:6px 8px 6px 14px;font-size:.88rem;line-height:1.35;cursor:pointer}
+.it:hover{background:var(--soft)}
+.it[aria-current]{background:var(--soft);box-shadow:inset 3px 0 var(--uc);font-weight:700}
+.it .dot{background:var(--uc);margin-top:.35em}.it .dot.st{background:none;border-color:var(--uc)}
+main{padding:26px clamp(16px,3vw,44px) 70px;min-width:0;max-width:1240px}
+.crumb{font-size:.88rem;color:var(--uc);font-weight:700;margin:0}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.55rem,3.2vw,2.35rem);line-height:1.12;margin:.25em 0 .45em;max-width:32ch;letter-spacing:-.01em}
+h2{font-family:var(--disp);font-weight:700;font-size:1.15rem;margin:0 0 .45em}
+h3{font-size:1rem;margin:.9em 0 .3em}
+.obj{max-width:72ch;font-size:1.05rem;margin:0}
+.lay{display:grid;gap:22px;grid-template-columns:minmax(0,1fr);margin-top:20px}
+.proto p,.proto li{max-width:72ch}
+.proto ol{padding-left:1.4em;margin:0}.proto li{margin:.4em 0}
+.note{font-size:.88rem;color:var(--muted)}
+.bench{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--uc);border-radius:10px;padding:16px 16px 18px;container-type:inline-size;min-width:0}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end;margin-bottom:12px}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font-size:.88rem;padding:7px 12px;border:0;border-right:1px solid var(--line);background:var(--surface);cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--uc);color:var(--onu);font-weight:700}
+.b{font-size:.9rem;padding:8px 14px;border-radius:8px;border:1px solid var(--uc);background:var(--uc);color:var(--onu);cursor:pointer;font-weight:700}
+.b.ghost{background:transparent;color:var(--ink);border-color:var(--line);font-weight:400}
+.sl{display:flex;flex-direction:column;gap:2px;font-size:.88rem;min-width:170px;flex:1}
+.sl input{accent-color:var(--uc);width:100%}
+.ck{font-size:.88rem;display:inline-flex;gap:6px;align-items:center;margin-right:10px}
+.ck input{accent-color:var(--uc);width:18px;height:18px}
+.two{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@container (min-width:620px){.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.pic,.plot{width:100%;height:auto;display:block}
+svg text{font-family:var(--body);font-size:13px;fill:var(--muted)}
+.pw{max-width:760px}
+.plot .al{fill:var(--ink);font-weight:700;font-size:12.5px}
+.grid{stroke:var(--line);stroke-width:1}.axis{stroke:var(--ink);stroke-width:1.3}
+.ref{stroke:var(--muted);stroke-dasharray:3 4}.band{fill:var(--ink);opacity:.08}
+.ser{fill:none;stroke-linejoin:round;stroke-linecap:round}.mk{fill:var(--surface);stroke:var(--ink);stroke-width:2}
+.mkl{fill:var(--ink);font-weight:700}
+.fg1{fill:var(--g1)}.fg2{fill:var(--g2)}.fg3{fill:var(--g3)}.fg4{fill:var(--g4)}.fg5{fill:var(--g5)}
+.fmut{fill:var(--muted)}.fink{fill:var(--ink)}.fdark{fill:var(--dark)}.fwater{fill:var(--water)}.fsurf{fill:var(--surface)}
+.fsol{fill:var(--sol)}.fcell{fill:var(--cell)}.fguard{fill:var(--guard)}.fhot{fill:var(--hot)}
+.glass{fill:none;stroke:var(--ink);stroke-width:2}.turb{fill:var(--turb)}.shine{fill:#fff;opacity:.75}
+.sk{stroke:var(--ink);stroke-width:1}.nof{fill:none}.cut{stroke:var(--hot);stroke-width:3.5;fill:none}
+.lab{fill:var(--ink);font-weight:700;font-size:14px;paint-order:stroke;stroke:var(--surface);stroke-width:4px}
+.lnk{stroke:var(--muted);stroke-width:1;fill:none}
+.halo{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.out{margin-top:12px;padding:10px 14px;background:var(--soft);border-radius:8px;font-size:.95rem}
+.out p{margin:.3em 0}
+.t{border-collapse:collapse;width:100%;font-size:.9rem;margin:.4em 0}
+.t th,.t td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+.t th{background:var(--soft)}
+.t input{width:5.5em;padding:3px 6px;border:1px solid var(--line);border-radius:4px;background:var(--bg)}
+.t tr.on td{background:var(--soft);font-weight:700}
+.scroll{overflow-x:auto}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px 14px;font-size:.86rem;margin-bottom:10px}
+.grid4 label{display:flex;flex-direction:column;gap:3px}
+.grid4 input,.grid4 select{width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.sol h3{margin:0 0 6px}.sol{display:flex;flex-direction:column;gap:8px}
+.bar{display:grid;grid-template-columns:minmax(8em,12em) 1fr 3.5em;gap:8px;align-items:center;margin:7px 0;font-size:.88rem}
+.bar div{height:14px;background:var(--soft);border-radius:7px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--uc)}
+.lbl{font-weight:700;font-size:.9rem;margin:.2em 0 .4em}
+.leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.85rem;margin-top:4px}
+.leg i{display:inline-block;width:18px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.eq{background:var(--surface);border:1px solid var(--line);padding:2px 8px;border-radius:5px;display:inline-block;margin:4px 0}
+.rx{font-size:1.15rem;line-height:2;padding:8px 0}
+.hot{color:var(--hot);font-weight:700}
+.reveal{margin-top:14px}
+.rv{display:flex;width:100%;justify-content:space-between;align-items:center;font-family:var(--disp);font-weight:700;font-size:1.05rem;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;cursor:pointer;text-align:left}
+.rv::after{content:'+';font-size:1.4rem;line-height:1;color:var(--uc)}
+.rv[aria-expanded="true"]{border-radius:10px 10px 0 0}
+.rv[aria-expanded="true"]::after{content:'\2212'}
+.rvb{padding:12px 16px;border:1px solid var(--line);border-top:0;border-radius:0 0 10px 10px;background:var(--surface)}
+.rvb p{max-width:75ch;margin:.3em 0}
+.qs{margin-top:26px}.qs ol{padding-left:1.4em}.qs li{margin:.35em 0;max-width:72ch}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:16px}
+.pn a{text-decoration:none;color:var(--ink)}.pn .b{max-width:48%;text-align:left}.pn .b span{display:block;font-size:.78rem;color:var(--muted)}
+.hero{padding:10px 0 18px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);max-width:18ch;margin-bottom:.3em}
+.lead{font-size:1.12rem;max-width:62ch;margin:0 0 .8em}
+.meta{color:var(--muted);font-size:.92rem;margin:0}
+.units{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));margin-top:26px}
+.unit{border-top:5px solid var(--uc);padding-top:10px}
+.unit h2{margin:0;color:var(--uc)}.unit .un{margin:.1em 0 .4em;font-weight:700}
+.unit h3{font-size:.9rem;color:var(--muted);font-style:italic;font-weight:400;margin:1em 0 .2em}
+.unit ul{list-style:none;padding:0;margin:0}.unit li{margin:.25em 0;display:flex;gap:8px;align-items:baseline}
+.unit li .dot{background:var(--uc)}.unit li .dot.st{background:none;border-color:var(--uc)}
+.unit a{color:var(--ink);text-decoration-color:var(--line);text-underline-offset:3px}
+.unit a:hover{text-decoration-color:var(--uc)}
+.how{margin-top:34px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:10px;max-width:80ch}
+.how p{margin:.3em 0}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}.menu{display:inline-block}
+aside{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);max-height:none;z-index:30;transform:translateX(-105%);transition:transform .2s;padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+aside.open{transform:none}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:25}}
+@media (prefers-reduced-motion:reduce){aside{transition:none}}
+</style>
+</head>
+<body>
+<header class="top">
+<button class="tb menu" id="menu" aria-expanded="false" aria-controls="side">Expériences</button>
+<button class="brand" id="home">Laboratoire virtuel de SVT<small>1re année Bac Sciences expérimentales, Pr. EL Hassouni Mohamed</small></button>
+<button class="tb" id="big" aria-pressed="false">Grand écran</button>
+<button class="tb" id="theme">Thème sombre</button>
+</header>
+<div class="wrap">
+<aside id="side" aria-label="Liste des expériences">
+<input type="search" id="q" placeholder="Rechercher une expérience" aria-label="Rechercher une expérience">
+<p class="keyl"><span><i class="dot"></i>simulation interactive</span><span><i class="dot st"></i>étude de documents</span></p>
+<nav id="nav"></nav>
+</aside>
+<main id="main"></main>
+</div>
+<div class="scrim" id="scrim" hidden></div>
+<script>
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let cleanups=[];
+const later=f=>cleanups.push(f);
+function cleanup(){cleanups.forEach(f=>{try{f()}catch(e){}});cleanups=[]}
+const fmt=(x,d=2)=>Number(x).toFixed(d).replace('.',',');
+const fmtn=x=>String(x).replace('.',',');
+function rng(s){return()=>(s=s*16807%2147483647)/2147483647}
+function seg(n,opts,v){return `<div class="seg" role="group" data-n="${n}">${opts.map(([k,l])=>`<button type="button" data-v="${k}" aria-pressed="${k==v}">${l}</button>`).join('')}</div>`}
+function onSeg(r,n,cb){const g=r.querySelector(`.seg[data-n="${n}"]`);g.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));cb(b.dataset.v)})}
+function sl(n,l,mn,mx,st,v,u=''){return `<label class="sl"><span>${l} <b data-o="${n}">${fmtn(v)}</b> ${u}</span><input type="range" data-n="${n}" min="${mn}" max="${mx}" step="${st}" value="${v}"></label>`}
+function onSl(r,n,cb){const i=r.querySelector(`input[data-n="${n}"]`),o=r.querySelector(`[data-o="${n}"]`);i.addEventListener('input',()=>{o.textContent=fmtn(i.value);cb(+i.value)});return i}
+function btn(n,l,c=''){return `<button type="button" class="b ${c}" data-b="${n}">${l}</button>`}
+function onBtn(r,n,cb){r.querySelector(`[data-b="${n}"]`).addEventListener('click',cb)}
+const q=(r,s)=>r.querySelector(s);
+function plot(o){
+ const W=o.w||520,H=o.h||300,m={l:58,r:16,t:18,b:50},lg=Math.log10;
+ const tx=x=>o.xlog?(lg(x)-lg(o.x0))/(lg(o.x1)-lg(o.x0)):(x-o.x0)/(o.x1-o.x0);
+ const X=x=>m.l+tx(x)*(W-m.l-m.r),Y=y=>H-m.b-(y-o.y0)/(o.y1-o.y0)*(H-m.t-m.b);
+ const pr=t=>Array.isArray(t)?t:[t,fmtn(t)];
+ let s=`<svg viewBox="0 0 ${W} ${H}" class="plot" role="img" aria-label="${o.al||'Graphique'}">`;
+ (o.bands||[]).forEach(b=>{if(!b.nf)s+=`<rect x="${X(b.a)}" y="${m.t}" width="${Math.max(0,X(b.b)-X(b.a))}" height="${H-m.t-m.b}" class="band"/>`;if(b.l)s+=`<text x="${(X(b.a)+X(b.b))/2}" y="${m.t+15}" text-anchor="middle">${b.l}</text>`});
+ (o.xt||[]).forEach(t=>{const[v,l]=pr(t);s+=`<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H-m.b}" class="grid"/><text x="${X(v)}" y="${H-m.b+18}" text-anchor="middle">${l}</text>`});
+ (o.yt||[]).forEach(t=>{const[v,l]=pr(t);s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" class="grid"/><text x="${m.l-7}" y="${Y(v)+4}" text-anchor="end">${l}</text>`});
+ (o.hl||[]).forEach(v=>{s+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" class="ref"/>`});
+ s+=`<line x1="${m.l}" y1="${H-m.b}" x2="${W-m.r}" y2="${H-m.b}" class="axis"/><line x1="${m.l}" y1="${m.t}" x2="${m.l}" y2="${H-m.b}" class="axis"/>`;
+ if(o.xl)s+=`<text x="${(W+m.l)/2}" y="${H-8}" text-anchor="middle" class="al">${o.xl}</text>`;
+ if(o.yl)s+=`<text transform="translate(15 ${(H-m.b+m.t)/2}) rotate(-90)" text-anchor="middle" class="al">${o.yl}</text>`;
+ if(o.extra)s+=o.extra(X,Y);
+ (o.series||[]).forEach(se=>{if(!se.pts.length)return;s+=`<path d="M${se.pts.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join('L')}" class="ser" style="stroke:${se.c};stroke-width:${se.w||2.6}${se.dash?';stroke-dasharray:7 5':''}"/>`;if(se.dots)se.pts.forEach(p=>{s+=`<circle cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="3.8" style="fill:${se.c}"/>`})});
+ (o.marks||[]).forEach(k=>{s+=`<circle cx="${X(k.x)}" cy="${Y(k.y)}" r="5.5" class="mk"/>${k.l?`<text x="${Math.min(X(k.x)+9,W-110)}" y="${Math.max(Y(k.y)-10,m.t+12)}" class="mkl">${k.l}</text>`:''}`});
+ const leg=(o.series||[]).filter(x=>x.l).map(x=>`<span><i style="background:${x.c}"></i>${x.l}</span>`).join('');
+ return `<div class="pw">${s}</svg>${leg?`<div class="leg">${leg}</div>`:''}</div>`}
+const range=(a,b,st)=>{const r=[];for(let x=a;x<=b+1e-9;x+=st)r.push(+x.toFixed(6));return r};
+const fn=(a,b,st,f)=>range(a,b,st).map(x=>[x,f(x)]);
+const geoDefs=()=>`<defs><pattern id="pCg" width="16" height="14" patternUnits="userSpaceOnUse"><rect width="16" height="14" class="fg2"/><circle cx="4" cy="4" r="3" class="nof sk"/><circle cx="12" cy="10" r="2.3" class="nof sk"/></pattern><pattern id="pSa" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" class="fg1"/><circle cx="2" cy="2" r=".9" class="fink"/><circle cx="6" cy="6" r=".9" class="fink"/></pattern><pattern id="pAr" width="14" height="7" patternUnits="userSpaceOnUse"><rect width="14" height="7" class="fg4"/><path d="M1 3.5h8" class="nof sk"/></pattern><pattern id="pCa" width="20" height="12" patternUnits="userSpaceOnUse"><rect width="20" height="12" class="fg5"/><path d="M0 .5h20M0 6.5h20M5 0v6M15 6v6" class="nof sk"/></pattern><pattern id="pSub" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" class="fg3"/><path d="M0 12L12 0" class="nof sk"/></pattern></defs>`;
+const gs=(x,m,s)=>Math.exp(-(((x-m)/s)**2)/2);
+const ABS={a:x=>gs(x,430,14)+.78*gs(x,662,11)+.12*gs(x,615,14),b:x=>gs(x,455,14)+.52*gs(x,642,11)+.1*gs(x,595,14),c:x=>.85*gs(x,448,14)+.8*gs(x,476,13)+.55*gs(x,422,12)};
+ABS.brut=x=>(ABS.a(x)+.45*ABS.b(x)+.5*ABS.c(x))/1.62;
+const VIS=`<linearGradient id="vis" x1="0" x2="1"><stop offset="0" stop-color="#6A3DB8"/><stop offset=".17" stop-color="#2C5EE8"/><stop offset=".3" stop-color="#19A6C9"/><stop offset=".4" stop-color="#3AAE3A"/><stop offset=".57" stop-color="#E3D629"/><stop offset=".67" stop-color="#F08C1C"/><stop offset=".83" stop-color="#E3261C"/><stop offset="1" stop-color="#8A1010"/></linearGradient>`;
+const SIMS={};
+
+/* ---------- Unité 1 : géologie ---------- */
+SIMS.granulo=r=>{
+ const S=[2,1,.5,.25,.125,.063],P={dune:[0,0,2,30,58,8,2],plage:[2,8,20,35,25,7,3],fluv:[20,13,12,11,11,13,20]};
+ const T={dune:`Courbe très redressée : les grains ont presque tous la même taille. Seul un agent très sélectif, le <b>vent</b>, réalise un tri aussi poussé.`,plage:`Courbe redressée : bon classement. Le va-et-vient des <b>vagues</b> trie les grains, un peu moins bien que le vent.`,fluv:`Courbe étalée : toutes les tailles sont mélangées. Le <b>courant d'une rivière</b>, d'énergie variable, dépose des grains mal triés.`};
+ let cur='dune';
+ r.innerHTML=`<div class="ctl">${seg('s',[['dune','Sable de dune'],['plage','Sable de plage'],['fluv','Sable de rivière']],cur)}</div><div class="two"><div class="scroll"><table class="t"><thead><tr><th>Tamis (mm)</th><th>Refus (g)</th><th>% cumulé</th></tr></thead><tbody>${S.map((d,i)=>`<tr><td>${fmtn(d)}</td><td><input type="number" min="0" step="0.1" data-i="${i}" aria-label="Refus du tamis ${fmtn(d)} mm"></td><td data-c="${i}"></td></tr>`).join('')}<tr><td>Fond</td><td><input type="number" min="0" step="0.1" data-i="6" aria-label="Masse recueillie dans le fond"></td><td data-c="6"></td></tr></tbody></table><p class="note">Remplacez les masses par celles mesurées en classe : la courbe se recalcule.</p></div><div data-f></div></div><div class="out" data-out></div>`;
+ const ins=[...r.querySelectorAll('input[data-i]')];
+ const qt=(pts,v)=>{for(let i=0;i<pts.length-1;i++){const[a,ya]=pts[i],[b,yb]=pts[i+1];if(ya<=v&&yb>=v&&yb>ya){const t=(v-ya)/(yb-ya);return 10**(Math.log10(a)+t*(Math.log10(b)-Math.log10(a)))}}return null};
+ function draw(){
+  const m=ins.map(x=>Math.max(0,+x.value||0)),tot=m.reduce((a,b)=>a+b,0)||1;let c=0;const cum=m.map(v=>(c+=v)/tot*100);
+  cum.forEach((v,i)=>{q(r,`[data-c="${i}"]`).textContent=fmt(v,1)});
+  const pts=[[3,0],...S.map((d,i)=>[d,cum[i]])],q25=qt(pts,25),q50=qt(pts,50),q75=qt(pts,75);
+  q(r,'[data-f]').innerHTML=plot({x0:3,x1:.05,xlog:1,y0:0,y1:100,xt:S.map(d=>[d,fmtn(d)]),yt:[0,25,50,75,100],hl:[25,50,75],xl:'Diamètre des mailles (mm), échelle log',yl:'% cumulé des refus',series:[{pts,c:'var(--u1)',dots:1}],al:'Courbe granulométrique cumulative'});
+  let o='';
+  if(q25&&q75){const so=Math.sqrt(q25/q75),cl=so<=1.6?'très bien classé':so<=2.5?'bien classé':so<=4?'moyennement classé':'mal classé';o=`<p>Lecture graphique : Q25 = ${fmt(q25,2)} mm ; médiane = ${fmt(q50,2)} mm ; Q75 = ${fmt(q75,3)} mm.</p><p>Coefficient de classement : So = √(Q25 / Q75) = <b>${fmt(so,2)}</b>, sédiment <b>${cl}</b>. Plus So est proche de 1, meilleur est le tri.</p>`}
+  else o=`<p>Les quartiles ne peuvent pas être lus : trop de matériel est resté dans le fond.</p>`;
+  if(P[cur]&&P[cur].every((v,i)=>v==m[i]))o+=`<p>${T[cur]}</p>`;
+  q(r,'[data-out]').innerHTML=o}
+ const load=k=>{P[k].forEach((v,i)=>ins[i].value=v);draw()};
+ ins.forEach(x=>x.addEventListener('input',draw));
+ onSeg(r,'s',k=>{cur=k;load(k)});load(cur)};
+
+SIMS.morpho=r=>{
+ const P={riv:[65,30,5],plage:[10,80,10],dune:[5,15,80]},L=['Non usés (NU)','Émoussés-luisants (EL)','Ronds-mats (RM)'];
+ const T={riv:`Majorité de grains <b>non usés</b>, anguleux : transport court, dépôt proche de la roche d'origine.`,plage:`Majorité de grains <b>émoussés-luisants</b> : usure dans l'eau, où les chocs sont amortis ; transport aquatique prolongé.`,dune:`Majorité de grains <b>ronds-mats</b> : chocs violents entre les grains dans l'air ; transport éolien.`};
+ r.innerHTML=`<div class="ctl">${seg('s',[['riv','Sable de rivière (amont)'],['plage','Sable de plage'],['dune','Sable de dune']],'riv')}</div><div class="two"><div data-f></div><div data-bars></div></div><div class="out" data-out></div>`;
+ const grain=(t,cx,cy,g)=>{
+  if(t==0){const p=[];for(let k=0;k<7;k++){const a=k/7*6.283+g()*.5,rr=17+g()*15;p.push((cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1))}return `<polygon points="${p.join(' ')}" class="fg1 sk"/>`}
+  if(t==1)return `<g transform="rotate(${(g()*60-30).toFixed(0)} ${cx} ${cy})"><ellipse cx="${cx}" cy="${cy}" rx="${(25+g()*6).toFixed(1)}" ry="${(18+g()*4).toFixed(1)}" class="fg1 sk"/><ellipse cx="${cx-8}" cy="${cy-7}" rx="8" ry="3.5" class="shine"/></g>`;
+  return `<circle cx="${cx}" cy="${cy}" r="${(23+g()*4).toFixed(1)}" class="sk" style="fill:url(#mat)"/>`};
+ function draw(k){
+  const p=P[k],n=[Math.round(p[0]*.12),Math.round(p[1]*.12)];n.push(12-n[0]-n[1]);
+  const ty=[];n.forEach((c,t)=>{for(let i=0;i<c;i++)ty.push(t)});const g=rng(7);
+  for(let i=ty.length-1;i>0;i--){const j=Math.floor(g()*(i+1));[ty[i],ty[j]]=[ty[j],ty[i]]}
+  let s=`<svg viewBox="0 0 360 250" class="pic" role="img" aria-label="Grains de quartz observés à la loupe binoculaire"><defs><pattern id="mat" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" class="fg1"/><circle cx="1.5" cy="1.5" r=".8" class="fmut"/><circle cx="4" cy="3.8" r=".6" class="fmut"/></pattern></defs>`;
+  ty.forEach((t,i)=>{s+=grain(t,45+(i%4)*90,45+Math.floor(i/4)*80,g)});
+  q(r,'[data-f]').innerHTML=s+'</svg>';
+  q(r,'[data-bars]').innerHTML=`<p class="lbl">Pourcentage des grains observés</p>`+p.map((v,i)=>`<div class="bar"><span>${L[i]}</span><div><i style="width:${v}%"></i></div><b>${v} %</b></div>`).join('');
+  q(r,'[data-out]').innerHTML=`<p>${T[k]}</p>`}
+ onSeg(r,'s',draw);draw('riv')};
+
+SIMS.decant=r=>{
+ r.innerHTML=`<div class="ctl">${btn('go','Agiter puis laisser décanter')}</div><div data-f style="max-width:440px;margin:auto"></div><div class="out" data-out><p>L'éprouvette contient de l'eau et un mélange de gravier, de sable et d'argile.</p></div>`;
+ const K=[{n:14,r:6,v:3.2,a:263,b:283,c:'fg3'},{n:45,r:2.8,v:1.1,a:240,b:258,c:'fg2'},{n:170,r:1.2,v:.33,a:226,b:236,c:'fmut'}];
+ const g=rng(3),P=[];
+ K.forEach((k,ki)=>{for(let i=0;i<k.n;i++)P.push({k:ki,x:128+g()*104,y:0,ty:k.a+g()*(k.b-k.a)})});
+ P.forEach(p=>p.y=p.ty);
+ const f=q(r,'[data-f]'),out=h=>{q(r,'[data-out]').innerHTML=h};
+ function render(tb,lab){let s=`<svg viewBox="0 0 360 300" class="pic" role="img" aria-label="Éprouvette de décantation"><rect x="122" y="60" width="116" height="229" class="fwater"/>`;
+  P.forEach(p=>{const k=K[p.k];s+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${k.r}" class="${k.c}"/>`});
+  if(tb>0)s+=`<rect x="122" y="60" width="116" height="170" class="turb" style="opacity:${tb.toFixed(2)}"/>`;
+  s+=`<path d="M120 40 V280 Q120 292 132 292 H228 Q240 292 240 280 V40" class="glass"/><path d="M110 40 H250" class="glass"/>`;
+  if(lab)s+=`<path d="M244 273 H262 M244 249 H262 M244 231 H262" class="lnk"/><text x="266" y="277">gravier</text><text x="266" y="253">sable</text><text x="266" y="235">argile</text>`;
+  f.innerHTML=s+'</svg>'}
+ const done=()=>out(`<p>Les particules se sont déposées par ordre de taille décroissante : gravier au fond, puis sable, puis argile au sommet. C'est un <b>granoclassement</b>.</p>`);
+ let raf;later(()=>cancelAnimationFrame(raf));
+ onBtn(r,'go',()=>{cancelAnimationFrame(raf);P.forEach(p=>{p.y=64+g()*(p.ty-64);p.x=128+g()*104});
+  if(RM){P.forEach(p=>p.y=p.ty);render(0,1);done();return}
+  out(`<p>Décantation en cours : observez l'ordre d'arrivée des particules au fond.</p>`);
+  const step=()=>{let mv=0,cl=0;P.forEach(p=>{if(p.y<p.ty){p.y=Math.min(p.ty,p.y+K[p.k].v);mv++;if(p.k==2)cl++}});render(cl/K[2].n*.6,!mv);if(mv)raf=requestAnimationFrame(step);else done()};step()});
+ render(0,1)};
+
+SIMS.calci=r=>{
+ const P={calc:['Calcaire',47],cm:['Calcaire marneux',37],marne:['Marne',24],am:['Argile marneuse',9],arg:['Argile',1.5]};
+ const C=[[0,5,'Argile'],[5,35,'Argile marneuse'],[35,65,'Marne'],[65,95,'Calcaire marneux'],[95,100,'Calcaire']];
+ r.innerHTML=`<div class="ctl">${seg('s',Object.entries(P).map(([k,v])=>[k,v[0]]),'calc')}</div><div class="grid4"><label>Masse du témoin CaCO₃ pur m₀ (g)<input type="number" step="0.01" min="0" data-k="m0" value="0.2"></label><label>Volume de CO₂ du témoin V₀ (mL)<input type="number" step="0.1" min="0" data-k="v0" value="48"></label><label>Masse de l'échantillon m (g)<input type="number" step="0.01" min="0" data-k="m" value="0.2"></label><label>Volume de CO₂ dégagé V (mL)<input type="number" step="0.1" min="0" data-k="v" value="47"></label></div><div data-f style="max-width:640px"></div><div class="out" data-out></div>`;
+ const g=k=>+q(r,`[data-k="${k}"]`).value||0;
+ function draw(){const d=g('v0')*g('m'),pc=d?Math.min(100,Math.max(0,g('v')*g('m0')*100/d)):0,cl=C.find(c=>pc>=c[0]&&pc<=c[1])[2],X=v=>20+v*5.2;
+  let s=`<svg viewBox="0 0 560 104" class="pic" role="img" aria-label="Classification des roches selon leur taux de calcaire">`;
+  C.forEach((c,i)=>{s+=`<rect x="${X(c[0])}" y="26" width="${(c[1]-c[0])*5.2}" height="26" class="${i%2?'fg1':'fg4'} sk"/><text x="${i==4?X(100):X((c[0]+c[1])/2)}" y="${i%2?99:82}" text-anchor="${i==4?'end':'middle'}">${c[2]}</text>`});
+  [0,5,35,65,95,100].forEach(v=>{s+=`<text x="${X(v)}" y="18" text-anchor="middle">${v}</text>`});
+  s+=`<path d="M${X(pc).toFixed(1)} 55 l-7 11 h14z" class="fhot"/></svg>`;
+  q(r,'[data-f]').innerHTML=s;
+  q(r,'[data-out]').innerHTML=`<p>% CaCO₃ = (V × m₀ × 100) / (V₀ × m) = <b>${fmt(pc,1)} %</b> ; roche : <b>${cl}</b>.</p><p><span class="eq">CaCO₃ + 2 HCl → CaCl₂ + CO₂ + H₂O</span></p>`}
+ r.querySelectorAll('[data-k]').forEach(x=>x.addEventListener('input',draw));
+ onSeg(r,'s',k=>{q(r,'[data-k="v"]').value=P[k][1];q(r,'[data-k="m"]').value=0.2;draw()});draw()};
+
+SIMS.chaux=r=>{
+ const S=[{t:0,a:`Souffler de l'air expiré dans l'eau de chaux`,d:`Eau de chaux limpide : solution d'hydroxyde de calcium Ca(OH)₂.`},
+ {t:.75,a:`Continuer à souffler plusieurs minutes`,d:`Un trouble blanc apparaît : le CO₂ de l'air expiré provoque la précipitation du carbonate de calcium.<br><span class="eq">Ca(OH)₂ + CO₂ → CaCO₃ ↓ + H₂O</span>`,straw:1},
+ {t:0,a:`Chauffer la solution`,d:`La solution redevient limpide : le CO₂ en excès dissout le calcaire sous forme d'hydrogénocarbonate de calcium, soluble.<br><span class="eq">CaCO₃ + CO₂ + H₂O → Ca(HCO₃)₂</span>`,straw:1},
+ {t:.65,a:`Recommencer`,d:`Le trouble réapparaît : la chaleur chasse le CO₂ dissous et le calcaire précipite.<br><span class="eq">Ca(HCO₃)₂ → CaCO₃ ↓ + CO₂ ↑ + H₂O</span>`,heat:1}];
+ let i=0;
+ r.innerHTML=`<div class="ctl">${btn('go','')}</div><div class="two"><div data-f style="max-width:360px"></div><div class="out" data-out style="margin-top:0;align-self:start"></div></div>`;
+ function draw(){const s=S[i],g=rng(5);q(r,'[data-b="go"]').textContent=s.a;
+  let v=`<svg viewBox="0 0 300 280" class="pic" role="img" aria-label="Tube contenant de l'eau de chaux"><rect x="112" y="90" width="76" height="140" class="fwater"/>`;
+  if(s.t){v+=`<rect x="112" y="90" width="76" height="140" style="fill:#fff;opacity:${s.t*.8}"/>`;for(let k=0;k<40;k++)v+=`<circle cx="${(116+g()*68).toFixed(1)}" cy="${(222+g()*10).toFixed(1)}" r="1.6" class="fmut"/>`}
+  v+=`<path d="M110 40 V225 Q110 240 125 240 H175 Q190 240 190 225 V40" class="glass"/>`;
+  if(s.straw)v+=`<path d="M160 20 L150 215" style="stroke:var(--u1);stroke-width:6;stroke-linecap:round"/>`+[0,1,2,3].map(k=>`<circle cx="${140+k*6}" cy="${205-k*30}" r="4" class="nof sk"/>`).join('');
+  if(s.heat)v+=`<path d="M150 276 C134 266 138 252 150 246 C152 256 158 258 160 250 C168 260 166 270 150 276Z" class="fhot"/>`+[0,1,2].map(k=>`<circle cx="${130+k*20}" cy="${104+k*14}" r="3" class="nof sk"/>`).join('');
+  q(r,'[data-f]').innerHTML=v+'</svg>';
+  q(r,'[data-out]').innerHTML=`<p class="lbl">Étape ${i+1} sur 4</p><p>${s.d}</p>`}
+ onBtn(r,'go',()=>{i=(i+1)%4;draw()});draw()};
+
+SIMS.transg=r=>{
+ const F=[{n:'Émersion (lacune)'},{n:'Conglomérat, sable grossier',p:'pCg'},{n:'Sable fin',p:'pSa'},{n:'Argile',p:'pAr'},{n:'Calcaire',p:'pCa'}];
+ let L=1,col=[];
+ r.innerHTML=`<div class="ctl">${sl('l','Niveau de la mer :',0,4,1,L)}${btn('dep','Déposer une couche')}${btn('rz','Effacer la colonne','ghost')}</div><div class="two"><div data-sec></div><div data-col></div></div><div class="out" data-out></div>`;
+ function sec(){const ys=150-L*25,xs=(ys-60)/.344;
+  let s=`<svg viewBox="0 0 340 200" class="pic" role="img" aria-label="Coupe d'une bordure continentale">${geoDefs()}<polygon points="0,60 340,177 340,200 0,200" style="fill:url(#pSub)"/>`;
+  const pts=xs<0?`0,${ys} 340,${ys} 340,177 0,60`:`${xs.toFixed(1)},${ys} 340,${ys} 340,177`;
+  s+=`<polygon points="${pts}" class="fwater"/><path d="M${Math.max(0,xs).toFixed(1)} ${ys}H340" style="stroke:var(--u3);stroke-width:2"/>`;
+  s+=`<path d="M200 128.8 l-6 -11 h12z" class="fhot"/><text x="200" y="${ys<112?ys-6:108}" text-anchor="middle" class="lab" style="font-size:12px">site étudié</text>`;
+  s+=`<text x="12" y="44">continent</text><text x="330" y="${Math.min(ys+18,172)}" text-anchor="end">mer</text></svg>`;
+  q(r,'[data-sec]').innerHTML=s}
+ function column(){let s=`<svg viewBox="0 0 320 250" class="pic" role="img" aria-label="Colonne stratigraphique du site">${geoDefs()}<rect x="30" y="226" width="90" height="12" style="fill:url(#pSub)" class="sk"/>`;
+  let y=226;col.forEach(l=>{if(l==0){s+=`<path d="M26 ${y} q8 -5 16 0 t16 0 t16 0 t16 0 t16 0 t16 0" class="cut"/><text x="130" y="${y+4}">lacune</text>`;return}y-=26;s+=`<rect x="30" y="${y}" width="90" height="26" style="fill:url(#${F[l].p})" class="sk"/><text x="130" y="${y+17}">${F[l].n}</text>`});
+  if(!col.length)s+=`<text x="30" y="210">Déposez une première couche.</text>`;
+  q(r,'[data-col]').innerHTML=s+'</svg>'}
+ function interp(){const d=col.filter(l=>l>0);let o=`<p>Au site étudié, ce niveau marin correspond au faciès : <b>${F[L].n}</b>.</p>`;
+  if(d.length>=2){const up=d.every((v,i)=>!i||v>=d[i-1]),dn=d.every((v,i)=>!i||v<=d[i-1]);
+   if(up&&d[d.length-1]>d[0])o+=`<p><b>Série transgressive</b> : de bas en haut, les faciès sont de plus en plus fins et de plus en plus profonds. La mer avance sur le continent.</p>`;
+   else if(dn&&d[d.length-1]<d[0])o+=`<p><b>Série régressive</b> : de bas en haut, les faciès sont de plus en plus grossiers et de moins en moins profonds. La mer recule.</p>`;
+   else o+=`<p>La colonne enregistre une alternance de transgressions et de régressions.</p>`}
+  if(col.includes(0))o+=`<p>La lacune correspond à une période d'émersion : pas de sédimentation, parfois érosion.</p>`;
+  q(r,'[data-out]').innerHTML=o}
+ onSl(r,'l',v=>{L=v;sec();interp()});
+ onBtn(r,'dep',()=>{if(col.length<8){col.push(L);column();interp()}});
+ onBtn(r,'rz',()=>{col=[];column();interp()});sec();column();interp()};
+
+SIMS.chrono=r=>{
+ const OK=['A','B','C','G','F','D'],N={A:'Couche A',B:'Couche B',C:'Couche C',D:'Couche D',F:'Faille F',G:'Filon G'};let seq=[];
+ const blk=`<rect x="0" y="45" width="360" height="75" style="fill:url(#pCa)"/><rect x="0" y="120" width="360" height="50" style="fill:url(#pAr)"/><rect x="0" y="170" width="360" height="100" style="fill:url(#pSa)"/><path d="M0 120H360M0 170H360" class="nof sk"/><polygon points="16,265 34,265 344,45 326,45" class="fdark"/>`;
+ const svg=`<svg viewBox="0 0 360 250" class="pic" role="img" aria-label="Coupe géologique à interpréter">${geoDefs()}<defs><clipPath id="clL"><polygon points="0,70 250,70 200,240 0,240"/></clipPath><clipPath id="clR"><polygon points="250,70 360,70 360,240 200,240"/></clipPath></defs><g clip-path="url(#clL)">${blk}</g><g clip-path="url(#clR)"><g transform="translate(0 25)">${blk}</g></g><rect x="0" y="40" width="360" height="30" style="fill:url(#pCg)"/><path d="M0 70H360" style="stroke:var(--ink);stroke-width:2.5"/><path d="M200 240L250 70" style="stroke:var(--hot);stroke-width:3"/><rect x="0" y="40" width="360" height="200" class="nof sk"/><text x="12" y="60" class="lab">D</text><text x="12" y="100" class="lab">C</text><text x="12" y="150" class="lab">B</text><text x="12" y="212" class="lab">A</text><text x="336" y="112" class="lab">C</text><text x="336" y="168" class="lab">B</text><text x="336" y="222" class="lab">A</text><text x="138" y="196" class="lab">G</text><text x="236" y="150" class="lab">F</text></svg>`;
+ r.innerHTML=`<div data-f style="max-width:600px">${svg}</div><p class="lbl" style="margin-top:10px">Touchez les événements du plus ancien au plus récent :</p><div class="ctl" data-ev>${['A','B','C','D','F','G'].map(k=>`<button type="button" class="b ghost" data-e="${k}">${N[k]}</button>`).join('')}</div><div class="ctl">${btn('chk','Vérifier')}${btn('clr','Effacer','ghost')}</div><div class="out" data-out></div>`;
+ const show=h=>{q(r,'[data-out]').innerHTML=h};
+ const showSeq=()=>show(`<p>Votre ordre : ${seq.length?seq.map(k=>N[k]).join(', puis '):'aucun événement choisi'}.</p>`);
+ q(r,'[data-ev]').addEventListener('click',e=>{const b=e.target.closest('[data-e]');if(!b||seq.includes(b.dataset.e))return;seq.push(b.dataset.e);b.disabled=true;b.style.opacity=.45;showSeq()});
+ onBtn(r,'clr',()=>{seq=[];r.querySelectorAll('[data-e]').forEach(b=>{b.disabled=false;b.style.opacity=1});showSeq()});
+ onBtn(r,'chk',()=>{if(seq.length<6){show(`<p>Classez les six événements avant de vérifier.</p>`);return}const good=seq.every((k,i)=>k==OK[i]);
+  show(`<p><b>${good?'Ordre exact.':'Ordre à corriger.'}</b> Ordre attendu : ${OK.map(k=>N[k]).join(', puis ')}.</p><p>Superposition : A est recouverte par B, elle-même recouverte par C. Recoupement : le filon G traverse A, B et C, il leur est postérieur ; la faille F décale le filon G, elle est donc postérieure à G. La surface d'érosion tronque C, G et F ; la couche D repose dessus et n'est pas décalée par la faille : c'est l'événement le plus récent. Inclusion : les galets du conglomérat D proviennent de roches plus anciennes.</p>`)});
+ showSeq()};
+
+SIMS.regleV=r=>{
+ const C={hor:['Couche horizontale','0,160 180,115 360,160',`La limite d'affleurement suit les courbes de niveau : le V pointe vers l'amont, parallèle aux courbes.`],
+ ver:['Couche verticale','0,130 360,130',`La limite d'affleurement est une droite, indépendante du relief.`],
+ am:["Pendage vers l'amont",'0,150 180,126 360,150',`Le V pointe vers l'amont, mais il est plus ouvert que les courbes de niveau.`],
+ av:["Pendage vers l'aval",'0,108 180,152 360,108',`Le V pointe vers l'aval (pendage plus fort que la pente du fond de la vallée).`]};
+ r.innerHTML=`<div class="ctl">${seg('c',Object.entries(C).map(([k,v])=>[k,v[0]]),'hor')}</div><div data-f style="max-width:600px"></div><div class="out" data-out></div>`;
+ function draw(k){let s=`<svg viewBox="0 0 360 252" class="pic" role="img" aria-label="Vue en plan d'une vallée et limite d'affleurement d'une couche">`;
+  [60,120,180].forEach((y,i)=>{s+=`<polyline points="0,${y+45} 180,${y} 360,${y+45}" class="nof" style="stroke:var(--muted);stroke-dasharray:4 4"/><text x="4" y="${y+62}" class="halo">${300-i*50} m</text>`});
+  s+=`<path d="M180 12 V232" style="stroke:var(--u3);stroke-width:3"/><path d="M180 234 l-6 -12 h12z" style="fill:var(--u3)"/><text x="190" y="24">amont</text><text x="190" y="228">aval</text>`;
+  s+=`<polyline points="${C[k][1]}" class="nof" style="stroke:var(--hot);stroke-width:4;stroke-linejoin:round"/></svg>`;
+  q(r,'[data-f]').innerHTML=s;q(r,'[data-out]').innerHTML=`<p>${C[k][2]}</p><p class="note">Pointillés : courbes de niveau. Trait bleu : cours d'eau. Trait épais : limite d'affleurement de la couche.</p>`}
+ onSeg(r,'c',draw);draw('hor')};
+
+/* ---------- Unité 2 : absorption ---------- */
+SIMS.racine=r=>{let j=0;
+ r.innerHTML=`<div class="ctl">${sl('j','Durée écoulée :',0,6,1,0,'jour(s)')}</div><div class="two"><div data-f style="max-width:340px"></div><div data-g></div></div><div class="out" data-out></div>`;
+ const vA=d=>50-3.5*d,Yv=v=>272-v*3.6;
+ function tube(x,v,plant,lab){const y=Yv(v);let s=`<rect x="${x+2}" y="${y}" width="42" height="${272-y}" class="fwater"/><rect x="${x+2}" y="${y-6}" width="42" height="6" style="fill:#E3C75A"/>`;
+  if(plant)s+=`<path d="M${x+23} ${y+4} q-8 30 -12 70 M${x+23} ${y+4} q2 40 0 80 M${x+23} ${y+4} q10 30 12 66" class="nof" style="stroke:var(--u1);stroke-width:1.6"/><path d="M${x+23} ${y+4} V14" style="stroke:var(--u2);stroke-width:4"/><ellipse cx="${x+8}" cy="26" rx="15" ry="6" transform="rotate(-25 ${x+8} 26)" style="fill:var(--u2)"/><ellipse cx="${x+38}" cy="40" rx="15" ry="6" transform="rotate(25 ${x+38} 40)" style="fill:var(--u2)"/>`;
+  s+=`<path d="M${x} 80 V266 Q${x} 274 ${x+8} 274 H${x+38} Q${x+46} 274 ${x+46} 266 V80" class="glass"/><text x="${x+23}" y="294" text-anchor="middle">${lab}</text>`;return s}
+ function draw(){let s=`<svg viewBox="0 0 300 300" class="pic" role="img" aria-label="Éprouvettes graduées avec et sans plante">`;
+  [0,10,20,30,40,50].forEach(v=>{s+=`<path d="M52 ${Yv(v)}h8" class="nof sk"/><text x="48" y="${Yv(v)+4}" text-anchor="end">${v}</text>`});
+  s+=tube(64,vA(j),1,'avec plante')+tube(190,50,0,'témoin')+'</svg>';
+  q(r,'[data-f]').innerHTML=s;
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:6,y0:20,y1:55,xt:[0,1,2,3,4,5,6],yt:[20,30,40,50],xl:'Temps (jours)',yl:"Volume d'eau (mL)",series:[{pts:fn(0,j,1,vA),c:'var(--u2)',dots:1,l:'avec plante'},{pts:fn(0,j,1,()=>50),c:'var(--muted)',dash:1,dots:1,l:'témoin'}],al:"Évolution du volume d'eau"});
+  q(r,'[data-out]').innerHTML=`<p>Volume absorbé par la plante en ${j} jour(s) : <b>${fmt(3.5*j,1)} mL</b>. Volume perdu par le témoin : <b>0 mL</b>, car la couche d'huile empêche l'évaporation.</p>`}
+ onSl(r,'j',v=>{j=v;draw()});draw()};
+
+SIMS.dutro=r=>{let ci=.5,ce=0;
+ r.innerHTML=`<div class="ctl">${sl('ci',"Saccharose dans l'entonnoir :",0,1,.1,ci,'mol/L')}${sl('ce','Saccharose dans le bécher :',0,1,.1,ce,'mol/L')}</div><div class="two"><div data-f style="max-width:320px"></div><div data-g></div></div><div class="out" data-out></div>`;
+ function draw(){const he=100*(ci-ce),h=t=>he*(1-Math.exp(-t/9)),y=Math.min(185,Math.max(24,150-h(40)*.9));
+  let s=`<svg viewBox="0 0 260 300" class="pic" role="img" aria-label="Osmomètre de Dutrochet"><rect x="22" y="170" width="216" height="114" class="fwater"/><path d="M20 150 V286 H240 V150" class="glass"/>`;
+  s+=`<path d="M78 255 L126 190 V${y.toFixed(1)} H134 V190 L182 255 Z" class="fsol"/><path d="M78 255 L126 190 V16 M134 16 V190 L182 255" class="glass"/><path d="M76 255 H184" style="stroke:var(--u1);stroke-width:4;stroke-dasharray:5 3"/>`;
+  s+=`<path d="M136 150 H158" class="lnk"/><text x="161" y="154">niveau initial</text><text x="130" y="276" text-anchor="middle">membrane semi-perméable</text></svg>`;
+  q(r,'[data-f]').innerHTML=s;
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:40,y0:-100,y1:100,xt:[0,10,20,30,40],yt:[-100,-50,0,50,100],hl:[0],xl:'Temps (min)',yl:'Variation du niveau (mm)',series:[{pts:fn(0,40,1,h),c:'var(--u2)'}],al:'Variation du niveau dans le tube'});
+  const d=ci-ce;q(r,'[data-out]').innerHTML=Math.abs(d)<1e-6?`<p>Concentrations égales : milieux <b>isotoniques</b>, pas de flux net d'eau, le niveau ne varie pas.</p>`:d>0?`<p>La solution de l'entonnoir est <b>hypertonique</b> : l'eau entre dans l'entonnoir à travers la membrane, le niveau <b>monte</b> puis se stabilise quand la pression hydrostatique équilibre la pression osmotique.</p>`:`<p>La solution de l'entonnoir est <b>hypotonique</b> : l'eau sort de l'entonnoir vers le bécher, le niveau <b>descend</b>.</p>`}
+ onSl(r,'ci',v=>{ci=v;draw()});onSl(r,'ce',v=>{ce=v;draw()});draw()};
+
+SIMS.plasmo=r=>{let ty='oig',c=0;
+ r.innerHTML=`<div class="ctl">${seg('t',[['oig',"Épiderme d'oignon rouge"],['gr','Globules rouges']],ty)}${sl('c','Solution de NaCl :',0,30,.5,0,'g/L')}</div><div data-f style="max-width:600px"></div><div class="out" data-out></div>`;
+ function oig(){const k=c<=9?1:c<=11?.95:Math.max(.4,.95-(c-11)*.03);let s=`<svg viewBox="0 0 360 236" class="pic" role="img" aria-label="Cellules d'épiderme d'oignon rouge au microscope">`;
+  [20,190].forEach(x=>{const cx=x+75,cy=115,w=136*k,h=176*k,rx=4+(1-k)*70;
+   s+=`<rect x="${x}" y="20" width="150" height="190" class="fcell" style="stroke:var(--ink);stroke-width:4"/><rect x="${(cx-w/2).toFixed(1)}" y="${(cy-h/2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${rx.toFixed(1)}" class="fg5 sk"/><rect x="${(cx-w/2+7).toFixed(1)}" y="${(cy-h/2+7).toFixed(1)}" width="${(w-14).toFixed(1)}" height="${(h-14).toFixed(1)}" rx="${Math.max(0,rx-5).toFixed(1)}" style="fill:var(--antho);opacity:${Math.min(1,.45+(1-k)*1.1).toFixed(2)}"/><circle cx="${(cx-w/2+14).toFixed(1)}" cy="${(cy-h/2+16).toFixed(1)}" r="7" class="fmut"/>`});
+  s+=`<text x="95" y="228" text-anchor="middle">paroi</text><text x="265" y="228" text-anchor="middle">vacuole colorée</text></svg>`;
+  const st=c<=9?`Milieu <b>hypotonique</b> par rapport au suc vacuolaire : l'eau entre dans la vacuole, qui occupe presque tout le volume de la cellule. La cellule est <b>turgescente</b>.`:c<=11?`Milieu proche de l'isotonie : début de décollement du cytoplasme dans les angles, c'est la <b>plasmolyse naissante</b>.`:`Milieu <b>hypertonique</b> : l'eau sort de la vacuole, qui se rétracte et se colore plus intensément ; le cytoplasme se décolle de la paroi. La cellule est <b>plasmolysée</b>. Ramenez le curseur à 0 g/L : la déplasmolyse montre que le phénomène est réversible.`;
+  return [s,st]}
+ function gr(){const P=[[70,70],[180,60],[290,80],[120,165],[240,170]];let s=`<svg viewBox="0 0 360 236" class="pic" role="img" aria-label="Globules rouges au microscope">`;
+  P.forEach(([x,y])=>{
+   if(c<4)s+=`<circle cx="${x}" cy="${y}" r="33" class="nof" style="stroke:var(--rbc);stroke-dasharray:5 7;stroke-width:2"/>`;
+   else if(c<8.5)s+=`<circle cx="${x}" cy="${y}" r="${(36-(c-4)*.6).toFixed(1)}" style="fill:var(--rbc)"/>`;
+   else if(c<=9.5)s+=`<circle cx="${x}" cy="${y}" r="30" style="fill:var(--rbc)"/><circle cx="${x}" cy="${y}" r="12" style="fill:var(--rbcl)"/>`;
+   else{const R=Math.max(20,30-(c-9.5)*.5),n=16,p=[];for(let k=0;k<n*2;k++){const a=k/(n*2)*6.283,rr=k%2?R:R+5;p.push((x+rr*Math.cos(a)).toFixed(1)+','+(y+rr*Math.sin(a)).toFixed(1))}s+=`<polygon points="${p.join(' ')}" style="fill:var(--rbc)"/>`}});
+  const st=c<4?`Milieu très <b>hypotonique</b> : l'eau entre massivement, la membrane se rompt et l'hémoglobine se répand : <b>hémolyse</b>.`:c<8.5?`Milieu <b>hypotonique</b> : l'eau entre, les globules rouges gonflent et deviennent sphériques.`:c<=9.5?`Milieu <b>isotonique</b> (9 g/L, eau physiologique) : les globules gardent leur forme de disque biconcave.`:`Milieu <b>hypertonique</b> : l'eau sort, les globules se ratatinent et prennent un aspect hérissé : <b>crénelure</b>.`;
+  return [s+'</svg>',st]}
+ function draw(){const[s,st]=ty=='oig'?oig():gr();q(r,'[data-f]').innerHTML=s;q(r,'[data-out]').innerHTML=`<p>${st}</p>`}
+ onSeg(r,'t',v=>{ty=v;draw()});onSl(r,'c',v=>{c=v;draw()});draw()};
+
+SIMS.posm=r=>{
+ const S={glu:['Glucose',180,1],sac:['Saccharose',342,1],nacl:['NaCl',58.5,2],kcl:['KCl',74.5,2],cacl:['CaCl₂',111,3]};
+ const opts=Object.entries(S).map(([k,v])=>`<option value="${k}">${v[0]} (M = ${fmtn(v[1])} g/mol ; i = ${v[2]})</option>`).join('');
+ const col=(n,s,c)=>`<div class="sol"><h3>Solution ${n}</h3><label>Soluté<select data-s="${n}">${opts.replace(`value="${s}"`,`value="${s}" selected`)}</select></label><label>Concentration massique (g/L)<input type="number" step="0.1" min="0" data-c="${n}" value="${c}"></label></div>`;
+ r.innerHTML=`<div class="grid4">${col('A','nacl',9)}${col('B','glu',55)}<label>Température (°C)<input type="number" step="1" data-t value="37"></label></div><div class="out" data-out></div>`;
+ function P(n){const s=S[q(r,`[data-s="${n}"]`).value],cm=+q(r,`[data-c="${n}"]`).value||0,T=(+q(r,'[data-t]').value||0)+273,C=cm/s[1];return{s,cm,C,T,p:s[2]*C*.082*T}}
+ function draw(){const A=P('A'),B=P('B'),m=Math.max(A.p,B.p);
+  const line=(n,x)=>`<p><b>${n}</b> : C = ${fmtn(x.cm)} / ${fmtn(x.s[1])} = ${fmt(x.C,4)} mol/L ; P = ${x.s[2]} × ${fmt(x.C,4)} × 0,082 × ${x.T} = <b>${fmt(x.p,2)} atm</b> (environ ${fmt(x.p*101.325,0)} kPa)</p>`;
+  let cmp='';
+  if(m&&Math.abs(A.p-B.p)/m<.03)cmp=`<p>Les deux solutions sont pratiquement <b>isotoniques</b> : pas de flux net d'eau entre elles.</p>`;
+  else if(m){const[h,l]=A.p>B.p?['A','B']:['B','A'];cmp=`<p>La solution ${h} est <b>hypertonique</b> par rapport à la solution ${l} : séparées par une membrane semi-perméable, l'eau irait de ${l} vers ${h}.</p>`}
+  q(r,'[data-out]').innerHTML=line('Solution A',A)+line('Solution B',B)+cmp}
+ r.querySelectorAll('select,input').forEach(x=>{x.addEventListener('input',draw);x.addEventListener('change',draw)});draw()};
+
+SIMS.ions=r=>{
+ const K={nor:['Aération, 25 °C',28],o2:['Sans dioxygène',1],kcn:['Avec KCN',1],fr:['À 0 °C',1.2]};let k='nor';
+ r.innerHTML=`<div class="ctl">${seg('k',Object.entries(K).map(([a,b])=>[a,b[0]]),k)}</div><div data-g></div><div class="out" data-out></div>`;
+ const f=m=>t=>.3+(m-.3)*(1-Math.exp(-t/30));
+ function draw(){const se=[{pts:fn(0,120,2,f(K[k][1])),c:'var(--u2)',l:'K⁺ dans les cellules ('+K[k][0]+')'}];if(k!='nor')se.push({pts:fn(0,120,2,f(28)),c:'var(--muted)',dash:1,l:'référence : aération, 25 °C'});
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:120,y0:0,y1:30,xt:[0,30,60,90,120],yt:[0,5,10,15,20,25,30],hl:[1],xl:'Temps (min)',yl:'[K⁺] (mmol/L)',series:se,al:'Concentration du K+ dans les cellules',extra:(X,Y)=>`<text x="${X(118)}" y="${Y(1)-6}" text-anchor="end">milieu extérieur : 1 mmol/L</text>`});
+  const v=f(K[k][1])(120);
+  q(r,'[data-out]').innerHTML=`<p>Après 2 h : [K⁺] dans les cellules ≈ <b>${fmt(v,1)} mmol/L</b>, soit ${fmt(v,1)} fois la concentration du milieu.</p><p>${k=='nor'?`Les cellules accumulent le K⁺ <b>contre son gradient de concentration</b> : c'est un <b>transport actif</b>.`:`L'accumulation est supprimée : le K⁺ n'entre que par <b>diffusion</b>, jusqu'à l'égalité des concentrations. Le transport actif dépend de la respiration, source d'ATP.`}</p>`}
+ onSeg(r,'k',v=>{k=v;draw()});draw()};
+
+/* ---------- Unité 2 : échanges gazeux et photosynthèse ---------- */
+SIMS.elodee=r=>{let L=60,T=25,co=1,B=[],gas=0,acc=0,raf,last=0;
+ r.innerHTML=`<div class="ctl">${sl('l','Éclairement :',0,100,5,L,'%')}${sl('t','Température :',0,45,1,T,'°C')}${seg('c',[['1','Eau + NaHCO₃'],['0','Eau bouillie (sans CO₂)']],'1')}</div><div class="two"><div data-f style="max-width:380px"></div><div data-g></div></div><div class="ctl" style="margin-top:10px">${btn('test','Tester le gaz avec une bûchette incandescente','ghost')}</div><div class="out" data-out></div>`;
+ const fT=t=>Math.max(0,1-((t-30)/16)**2),rate=(l,t,c)=>Math.round(48*fT(t)*(c?1:.08)*l/(l+25));
+ q(r,'[data-f]').innerHTML=`<svg viewBox="0 0 330 300" class="pic" role="img" aria-label="Montage avec élodée éclairée"><circle cx="40" cy="150" r="30" data-glow style="fill:#F4D03F"/><rect x="8" y="138" width="22" height="24" class="fdark"/><path d="M70 150 H96" data-ray style="stroke:#E0B820;stroke-width:3;stroke-dasharray:4 4"/><rect x="102" y="90" width="206" height="196" class="fwater"/><path d="M100 70 V286 H310 V70" class="glass"/><path d="M130 272 L270 272 L214 206 L214 158 L186 158 L186 206 Z" class="nof sk" style="stroke-width:2"/><rect x="186" y="44" width="28" height="118" rx="12" class="fwater"/><rect x="186" y="44" width="28" height="0" data-gas class="fsurf"/><rect x="186" y="44" width="28" height="118" rx="12" class="nof sk" style="stroke-width:2"/><path d="M150 268 Q175 240 200 210 M250 268 Q225 240 200 210" style="stroke:var(--u2);stroke-width:3;fill:none"/>${[0,1,2,3,4,5].map(i=>`<ellipse cx="${156+i*8}" cy="${258-i*8}" rx="7" ry="2.4" transform="rotate(-40 ${156+i*8} ${258-i*8})" style="fill:var(--u2)"/><ellipse cx="${244-i*8}" cy="${258-i*8}" rx="7" ry="2.4" transform="rotate(40 ${244-i*8} ${258-i*8})" style="fill:var(--u2)"/>`).join('')}<g data-bub></g><path d="M218 56 H240" class="lnk"/><text x="243" y="60">gaz recueilli</text></svg>`;
+ const bub=q(r,'[data-bub]'),gr=q(r,'[data-gas]'),glow=q(r,'[data-glow]'),ray=q(r,'[data-ray]');
+ function upd(){const R=rate(L,T,co);glow.style.opacity=(.15+L/100*.85).toFixed(2);ray.style.opacity=L?1:0;
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:100,y0:0,y1:50,xt:[0,25,50,75,100],yt:[0,10,20,30,40,50],xl:'Éclairement (%)',yl:'Bulles par minute',series:[{pts:fn(0,100,5,l=>rate(l,T,co)),c:'var(--u2)'}],marks:[{x:L,y:R,l:R+' bulles/min'}],al:"Intensité de la photosynthèse selon l'éclairement"});
+  const lim=R==0?`Aucun dégagement mesurable dans ces conditions.`:!co?`Le CO₂ est le facteur limitant.`:fT(T)<.6?`La température est le facteur limitant.`:L<45?`L'éclairement est le facteur limitant.`:`Conditions proches de l'optimum : le dégagement atteint un palier.`;
+  q(r,'[data-out]').innerHTML=`<p>Intensité mesurée : <b>${R} bulles par minute</b>. ${lim}</p>`;
+  if(RM)bub.innerHTML=Array.from({length:Math.min(8,Math.ceil(R/6))},(_,i)=>`<circle cx="200" cy="${196-i*16}" r="3" class="nof sk"/>`).join('');
+  return R}
+ let R=upd();
+ const loop=ts=>{const dt=last?Math.min(.1,(ts-last)/1000):0;last=ts;acc+=dt*R/60*4;while(acc>=1){acc--;B.push({x:200+(Math.random()-.5)*6,y:206})}
+  const top=46+gas;B.forEach(b=>{b.y-=90*dt});B=B.filter(b=>{if(b.y<=top){gas=Math.min(60,gas+.25);return false}return true});
+  gr.setAttribute('height',gas.toFixed(1));bub.innerHTML=B.map(b=>`<circle cx="${b.x.toFixed(1)}" cy="${b.y.toFixed(1)}" r="3" class="nof sk"/>`).join('');raf=requestAnimationFrame(loop)};
+ if(!RM){raf=requestAnimationFrame(loop);later(()=>cancelAnimationFrame(raf))}
+ onSl(r,'l',v=>{L=v;R=upd()});onSl(r,'t',v=>{T=v;R=upd()});onSeg(r,'c',v=>{co=+v;R=upd()});
+ onBtn(r,'test',()=>{q(r,'[data-out]').innerHTML+=R>0?`<p>La bûchette incandescente <b>se rallume</b> : le gaz recueilli est riche en <b>dioxygène</b>.</p>`:`<p>Aucun gaz n'a été recueilli : le test est impossible.</p>`})};
+
+SIMS.exao=r=>{let light=true,t=0,o2=8,co2=1.5,D=[[0,8,1.5]],dk=[],view='o2',tm;
+ r.innerHTML=`<div class="ctl">${btn('lamp','Éteindre la lampe')}${btn('rst','Recommencer','ghost')}${seg('v',[['o2','Courbe du O₂'],['co2','Courbe du CO₂']],'o2')}</div><div data-g></div><div class="out" data-out></div>`;
+ function draw(){const i=view=='o2'?1:2;
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:40,y0:0,y1:view=='o2'?16:3,xt:[0,10,20,30,40],yt:view=='o2'?[0,4,8,12,16]:[0,1,2,3],xl:'Temps (min)',yl:view=='o2'?'O₂ dissous (mg/L)':'CO₂ dissous (mg/L)',bands:dk.map(([a,b])=>({a,b:b==null?t:b,l:'obscurité'})),series:[{pts:D.map(d=>[d[0],d[i]]),c:view=='o2'?'var(--u2)':'var(--u1)'}],al:'Enregistrement ExAO'});
+  q(r,'[data-out]').innerHTML=t>=40?`<p>Enregistrement terminé. Comparez les pentes : à la lumière, photosynthèse nette ; à l'obscurité, respiration seule.</p>`:light?`<p>Lampe allumée : la teneur en O₂ <b>augmente</b> et celle en CO₂ <b>diminue</b>. La production d'O₂ par la photosynthèse dépasse sa consommation par la respiration.</p>`:`<p>Obscurité : la teneur en O₂ <b>diminue</b> et celle en CO₂ <b>augmente</b>. Seule la respiration a lieu.</p>`}
+ function tick(){if(t>=40){clearInterval(tm);draw();return}t=+(t+.5).toFixed(1);o2=Math.min(16,Math.max(0,o2+(light?.12:-.045)));co2=Math.max(.05,co2+(light?-.02:.008));D.push([t,o2,co2]);draw()}
+ const start=()=>{clearInterval(tm);tm=setInterval(tick,RM?120:250)};later(()=>clearInterval(tm));
+ onBtn(r,'lamp',()=>{if(t>=40)return;light=!light;if(light)dk[dk.length-1][1]=t;else dk.push([t,null]);q(r,'[data-b="lamp"]').textContent=light?'Éteindre la lampe':'Allumer la lampe';draw()});
+ onBtn(r,'rst',()=>{light=true;t=0;o2=8;co2=1.5;D=[[0,8,1.5]];dk=[];q(r,'[data-b="lamp"]').textContent='Éteindre la lampe';draw();start()});
+ onSeg(r,'v',v=>{view=v;draw()});draw();start()};
+
+SIMS.bbt=r=>{let after=false;
+ const T=[['Élodée','lumière','#2E6DB4'],['Élodée','obscurité','#D6B21E'],['BBT seul','lumière','#3F9A5A'],['Escargot','lumière','#D6B21E']];
+ r.innerHTML=`<div class="ctl">${btn('go','Attendre 2 heures')}</div><div data-f style="max-width:560px"></div><div class="out" data-out></div>`;
+ function draw(){let s=`<svg viewBox="0 0 360 262" class="pic" role="img" aria-label="Quatre tubes de bleu de bromothymol">`;
+  T.forEach((t,i)=>{const x=24+i*86,col=after?t[2]:'#3F9A5A';
+   s+=`<path d="M${x} 50 V180 Q${x} 202 ${x+22} 202 Q${x+44} 202 ${x+44} 180 V50" style="fill:${col};opacity:.85"/><path d="M${x} 30 V180 Q${x} 202 ${x+22} 202 Q${x+44} 202 ${x+44} 180 V30" class="glass"/><text x="${x+22}" y="222" text-anchor="middle" class="lab">${i+1}</text>`;
+   if(i<2)s+=`<path d="M${x+22} 190 V70" style="stroke:#1F5E33;stroke-width:3"/>`+[0,1,2,3].map(k=>`<ellipse cx="${x+15}" cy="${170-k*28}" rx="8" ry="3" transform="rotate(-30 ${x+15} ${170-k*28})" style="fill:#1F5E33"/><ellipse cx="${x+29}" cy="${158-k*28}" rx="8" ry="3" transform="rotate(30 ${x+29} ${158-k*28})" style="fill:#1F5E33"/>`).join('');
+   if(i==1)s+=`<rect x="${x-6}" y="42" width="56" height="168" rx="8" class="nof" style="stroke:var(--ink);stroke-width:2;stroke-dasharray:6 4"/>`;
+   if(i==3)s+=`<ellipse cx="${x+22}" cy="186" rx="15" ry="9" style="fill:#7A5A3A"/><path d="M${x+22} 186 m-6 0 a6 6 0 1 1 6 6" class="nof" style="stroke:#E8D2B0;stroke-width:1.5"/>`;
+   s+=`<text x="${x+22}" y="241" text-anchor="middle">${t[0]}</text><text x="${x+22}" y="256" text-anchor="middle">${t[1]}</text>`});
+  q(r,'[data-f]').innerHTML=s+'</svg>';q(r,'[data-b="go"]').textContent=after?'Revenir au début':'Attendre 2 heures';
+  q(r,'[data-out]').innerHTML=after?`<p>Tube 1 <b>bleu</b> : le CO₂ a été absorbé par l'élodée éclairée. Tubes 2 et 4 <b>jaunes</b> : du CO₂ a été rejeté par la respiration. Tube 3 <b>vert</b> : la lumière seule ne modifie pas l'indicateur.</p><p class="note">BBT jaune : milieu acide, riche en CO₂. Vert : neutre. Bleu : milieu basique, appauvri en CO₂.</p>`:`<p>Au départ, les quatre tubes contiennent du BBT <b>vert</b> (neutre). Le tube 2 est entouré de papier noir (pointillés).</p>`}
+ onBtn(r,'go',()=>{after=!after;draw()});draw()};
+
+SIMS.stom=r=>{let op=true;
+ r.innerHTML=`<div class="ctl">${seg('o',[['1','Lumière, eau disponible'],['0',"Obscurité ou manque d'eau"]],'1')}</div><div data-f style="max-width:540px"></div><div class="out" data-out></div>`;
+ function draw(){const g=op?24:2,cl=180-g/2-17,cr=180+g/2+17;
+  let s=`<svg viewBox="0 0 360 240" class="pic" role="img" aria-label="Stomate observé au microscope"><rect width="360" height="240" class="fcell"/><path d="M0 55 L128 62 M232 62 L360 50 M0 185 L128 176 M232 176 L360 190 M60 0 V58 M300 0 V52 M60 181 V240 M300 188 V240 M0 120 H122 M238 120 H360" class="nof sk"/><ellipse cx="180" cy="120" rx="58" ry="78" class="nof sk"/>`;
+  s+=`<ellipse cx="${cl}" cy="120" rx="19" ry="62" class="fguard sk"/><ellipse cx="${cr}" cy="120" rx="19" ry="62" class="fguard sk"/><ellipse cx="180" cy="120" rx="${g/2}" ry="46" class="fink"/>`;
+  for(let k=0;k<5;k++)s+=`<circle cx="${cl-4+(k%2)*6}" cy="${82+k*18}" r="3.2" style="fill:#2F7A3D"/><circle cx="${cr+4-(k%2)*6}" cy="${82+k*18}" r="3.2" style="fill:#2F7A3D"/>`;
+  s+=`<path d="M${cl-14} 160 L60 214 M180 158 L246 214" class="lnk"/><text x="8" y="229" class="halo">cellule de garde</text><text x="248" y="229" class="halo">ostiole</text><text x="352" y="30" text-anchor="end" class="halo">cellule épidermique</text></svg>`;
+  q(r,'[data-f]').innerHTML=s;
+  q(r,'[data-out]').innerHTML=op?`<p>Ostiole <b>ouvert</b> : les cellules de garde, turgescentes, se courbent et s'écartent. Les échanges gazeux (entrée du CO₂, sortie du O₂ et de la vapeur d'eau) sont possibles.</p>`:`<p>Ostiole <b>fermé</b> : les cellules de garde ont perdu de l'eau. Les pertes d'eau sont limitées, mais l'entrée du CO₂ aussi.</p>`}
+ onSeg(r,'o',v=>{op=v=='1';draw()});draw()};
+
+SIMS.amidon=r=>{let sc='sachs',af=false;
+ const G='#3D8B4F',BN='#1E2446',BE='#D8C27E',WH='#EEF0E4',LF='M0 -100 C60 -85 85 -10 0 100 C-85 -10 -60 -85 0 -100Z';
+ const leaf=(tx,ty,k,fill,extra='',id='lf')=>`<g transform="translate(${tx} ${ty}) scale(${k})"><defs><clipPath id="${id}"><path d="${LF}"/></clipPath></defs><path d="M0 100 V130" style="stroke:${G};stroke-width:5"/><path d="${LF}" style="fill:${fill}"/><g clip-path="url(#${id})">${extra}</g><path d="${LF}" class="nof sk" style="stroke-width:1.5"/><path d="M0 -95 V98" style="stroke:rgba(0,0,0,.25);stroke-width:1.5"/></g>`;
+ r.innerHTML=`<div class="ctl">${seg('s',[['sachs','Feuille avec cache'],['pan','Feuille panachée'],['koh','Feuille privée de CO₂']],sc)}${seg('a',[['0','Avant le test'],['1',"Après l'eau iodée"]],'0')}</div><div data-f style="max-width:520px"></div><div class="out" data-out></div>`;
+ function draw(){let s=`<svg viewBox="0 0 360 260" class="pic" role="img" aria-label="Feuilles avant ou après le test à l'eau iodée">`,o;
+  if(sc=='sachs'){s+=leaf(180,112,1,af?BN:G,`<rect x="-90" y="-20" width="180" height="45" style="fill:${af?BE:'#9AA3AB'}"/>`)+`<path d="M296 114 H250" class="lnk"/><text x="300" y="118">${af?'zone cachée':'cache'}</text>`;
+   o=af?`La partie éclairée se colore en <b>bleu-noir</b> (amidon) ; la partie couverte par le cache reste <b>jaune-brun</b> (pas d'amidon). La lumière est nécessaire à la synthèse d'amidon.`:`Après 48 h d'obscurité (feuille sans amidon), une bande opaque couvre une partie du limbe pendant l'éclairement.`}
+  else if(sc=='pan'){s+=leaf(180,112,1,af?BE:WH,`<path d="${LF}" transform="scale(.62)" style="fill:${af?BN:G}"/>`);
+   o=af?`Seules les zones qui étaient vertes deviennent <b>bleu-noir</b> ; les zones blanches, sans chlorophylle, restent <b>jaune-brun</b>. La chlorophylle est nécessaire à la synthèse d'amidon.`:`La feuille panachée possède des zones vertes (chlorophylliennes) et des zones blanches.`}
+  else{s+=leaf(100,112,.62,af?BE:G,'','lfa')+leaf(260,112,.62,af?BN:G,'','lfb')+`<rect x="40" y="30" width="120" height="190" rx="28" class="nof sk" style="stroke-dasharray:6 4"/><rect x="200" y="30" width="120" height="190" rx="28" class="nof sk" style="stroke-dasharray:6 4"/><text x="100" y="242" text-anchor="middle">avec potasse (sans CO₂)</text><text x="260" y="242" text-anchor="middle">avec eau (témoin)</text>`;
+   o=af?`La feuille privée de CO₂ reste <b>jaune-brun</b> ; le témoin devient <b>bleu-noir</b>. Le CO₂ est nécessaire à la synthèse d'amidon.`:`Chaque feuille, restée attachée à la plante, est enfermée dans un flacon : l'un contient de la potasse, qui absorbe le CO₂, l'autre de l'eau.`}
+  q(r,'[data-f]').innerHTML=s+'</svg>';q(r,'[data-out]').innerHTML=`<p>${o}</p>`}
+ onSeg(r,'s',v=>{sc=v;draw()});onSeg(r,'a',v=>{af=v=='1';draw()});draw()};
+
+SIMS.chromato=r=>{
+ const P=[['Carotènes',.95,'#E8962A'],['Xanthophylles',.7,'#D9C62E'],['Chlorophylle a',.47,'#2E8B6E'],['Chlorophylle b',.35,'#8DB03A']];let f=0,raf;const FM=190;
+ r.innerHTML=`<div class="ctl">${btn('go','Lancer la migration')}${btn('rz','Recommencer','ghost')}</div><div class="two"><div data-f style="max-width:380px"></div><div data-tab></div></div><div class="out" data-out></div>`;
+ function draw(){let s=`<svg viewBox="0 0 330 310" class="pic" role="img" aria-label="Chromatographie sur papier">`;
+  s+=`<rect x="122" y="264" width="86" height="34" class="fwater"/><rect x="140" y="${258-f}" width="50" height="${f+38}" class="fwater" style="opacity:.55"/><rect x="140" y="22" width="50" height="274" class="nof sk"/><path d="M120 16 V288 Q120 300 132 300 H198 Q210 300 210 288 V16" class="glass"/><rect x="114" y="6" width="102" height="12" rx="3" class="fdark"/>`;
+  s+=`<path d="M140 258 H190" class="lnk" style="stroke-dasharray:3 3"/><path d="M110 258 H138" class="lnk"/><text x="106" y="262" text-anchor="end">ligne de dépôt</text>`;
+  if(f==0)s+=`<ellipse cx="165" cy="258" rx="10" ry="4" style="fill:#2A6B4F"/>`;
+  else{P.forEach(p=>{s+=`<ellipse cx="165" cy="${(258-p[1]*f).toFixed(1)}" rx="20" ry="${(3+f/80).toFixed(1)}" style="fill:${p[2]}"/>`});s+=`<path d="M140 ${258-f} H190" style="stroke:var(--u3);stroke-width:2"/><path d="M110 ${258-f} H138" class="lnk"/><text x="106" y="${262-f}" text-anchor="end">front du solvant</text>`}
+  if(f>=FM)P.forEach(p=>{s+=`<text x="216" y="${(262-p[1]*f).toFixed(1)}" class="lab" style="font-size:12px">${p[0]}</text>`});
+  q(r,'[data-f]').innerHTML=s+'</svg>';
+  q(r,'[data-tab]').innerHTML=f>=FM?`<table class="t"><thead><tr><th>Pigment</th><th>Distance (cm)</th><th>Rf</th></tr></thead><tbody>${P.map(p=>`<tr><td><i style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${p[2]};margin-right:6px"></i>${p[0]}</td><td>${fmt(p[1]*FM/20,1)}</td><td>${fmt(p[1],2)}</td></tr>`).join('')}</tbody></table><p class="note">Front du solvant : ${fmt(FM/20,1)} cm. Rf = distance parcourue par le pigment / distance parcourue par le solvant.</p>`:`<p class="note">Le tableau des Rf s'affiche à la fin de la migration.</p>`;
+  q(r,'[data-out]').innerHTML=f>=FM?`<p>La chlorophylle brute est un <b>mélange de quatre pigments</b> : les caroténoïdes (carotènes, xanthophylles) et les chlorophylles a et b.</p>`:f?`<p>Migration en cours…</p>`:`<p>Une tache de chlorophylle brute est déposée sur la ligne de dépôt ; le solvant se trouve au fond de l'éprouvette.</p>`}
+ later(()=>cancelAnimationFrame(raf));
+ onBtn(r,'go',()=>{cancelAnimationFrame(raf);if(RM){f=FM;draw();return}const st=()=>{f=Math.min(FM,f+1.1);draw();if(f<FM)raf=requestAnimationFrame(st)};st()});
+ onBtn(r,'rz',()=>{cancelAnimationFrame(raf);f=0;draw()});draw()};
+
+SIMS.spectre=r=>{const K=[['a','Chlorophylle a','var(--u2)'],['b','Chlorophylle b','#8DB03A'],['c','Caroténoïdes','#E8962A'],['brut','Chlorophylle brute','var(--ink)']];
+ r.innerHTML=`<div class="ctl">${K.map(([k,l],i)=>`<label class="ck"><input type="checkbox" data-k="${k}" ${i==3?'':'checked'}>${l}</label>`).join('')}</div><div data-g></div><div class="out" data-out><p>Deux bandes d'absorption : le <b>bleu-violet</b> (400 à 500 nm) et le <b>rouge</b> (640 à 680 nm). Le <b>vert</b> (500 à 600 nm) est peu absorbé : il est transmis ou réfléchi, d'où la couleur verte des feuilles.</p></div>`;
+ function draw(){const se=K.filter(([k])=>q(r,`[data-k="${k}"]`).checked).map(([k,l,c])=>({pts:fn(400,700,3,ABS[k]),c,l,dash:k=='brut'}));
+  q(r,'[data-g]').innerHTML=plot({x0:400,x1:700,y0:0,y1:1.1,xt:[400,450,500,550,600,650,700],yt:[0,.25,.5,.75,1],xl:"Longueur d'onde (nm)",yl:'Absorbance (relative)',series:se,al:"Spectres d'absorption des pigments",extra:(X,Y)=>`<defs>${VIS}</defs><rect x="${X(400)}" y="${Y(0)+2}" width="${X(700)-X(400)}" height="6" style="fill:url(#vis)"/>`})}
+ r.querySelectorAll('[data-k]').forEach(x=>x.addEventListener('change',draw));draw()};
+
+SIMS.engel=r=>{const N=110,g=rng(11);let B=[],raf,lit=false;
+ for(let i=0;i<N;i++){const x=32+g()*296,y=62+g()*72;B.push({x,y,x0:x,y0:y,tx:x,ty:y})}
+ r.innerHTML=`<div class="ctl">${btn('go','Éclairer avec un spectre')}${btn('dk','Obscurité','ghost')}</div><div data-f style="max-width:640px"></div><div class="out" data-out></div>`;
+ function render(){let s=`<svg viewBox="0 0 360 215" class="pic" role="img" aria-label="Filament d'algue éclairé par un spectre et bactéries aérobies"><defs>${VIS}</defs><rect x="30" y="160" width="300" height="18" style="fill:${lit?'url(#vis)':'var(--line)'}"/>`;
+  [400,500,600,700].forEach(v=>{s+=`<text x="${30+(v-400)}" y="196" text-anchor="middle">${v} nm</text>`});
+  s+=`<rect x="30" y="91" width="300" height="14" rx="7" style="fill:#4E9A5B"/>`;for(let x=40;x<325;x+=14)s+=`<path d="M${x} 92 l7 12" style="stroke:#2F6B3A;stroke-width:1.5"/>`;
+  B.forEach(b=>{s+=`<ellipse cx="${b.x.toFixed(1)}" cy="${b.y.toFixed(1)}" rx="2.8" ry="1.4" class="fink"/>`});
+  q(r,'[data-f]').innerHTML=s+'</svg>'}
+ function anim(){cancelAnimationFrame(raf);B.forEach(b=>{b.x0=b.x;b.y0=b.y});if(RM){B.forEach(b=>{b.x=b.tx;b.y=b.ty});render();return}let k=0;const st=()=>{k++;const t=Math.min(1,k/70),e=t*(2-t);B.forEach(b=>{b.x=b.x0+(b.tx-b.x0)*e;b.y=b.y0+(b.ty-b.y0)*e});render();if(t<1)raf=requestAnimationFrame(st)};st()}
+ later(()=>cancelAnimationFrame(raf));
+ const msg=()=>{q(r,'[data-out]').innerHTML=lit?`<p>Les bactéries aérobies s'accumulent en face du <b>bleu-violet</b> et du <b>rouge</b> : c'est là que le filament dégage le plus de dioxygène. Elles sont rares en face du vert.</p>`:`<p>À l'obscurité, les bactéries sont réparties au hasard autour du filament.</p>`};
+ onBtn(r,'go',()=>{lit=true;B.forEach(b=>{let x;do{x=30+g()*300}while(g()>ABS.brut(400+(x-30))*1.05+.03);b.tx=x;b.ty=98+(g()-.5)*30});anim();msg()});
+ onBtn(r,'dk',()=>{lit=false;B.forEach(b=>{b.tx=32+g()*296;b.ty=62+g()*72});anim();msg()});
+ render();msg()};
+
+SIMS.hill=r=>{let lum=1,acc=1;
+ r.innerHTML=`<div class="ctl">${seg('l',[['1','Lumière'],['0','Obscurité']],'1')}${seg('a',[['1','Avec réactif de Hill (Fe³⁺)'],['0','Sans réactif']],'1')}</div><div class="two"><div data-g></div><div data-t></div></div><div class="out" data-out></div>`;
+ const C=[[1,1,"Dégagement d'O₂"],[1,0,'Pas de dégagement'],[0,1,'Pas de dégagement'],[0,0,'Pas de dégagement']];
+ function draw(){const on=lum&&acc,f=t=>on?2+6*(1-Math.exp(-t/2.5)):2;
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:10,y0:0,y1:10,xt:[0,2,4,6,8,10],yt:[0,2,4,6,8,10],xl:'Temps (min)',yl:'O₂ (mg/L)',series:[{pts:fn(0,10,.25,f),c:'var(--u2)'}],al:'Teneur en dioxygène de la suspension de chloroplastes'});
+  q(r,'[data-t]').innerHTML=`<table class="t"><thead><tr><th>Lumière</th><th>Fe³⁺</th><th>Résultat</th></tr></thead><tbody>${C.map(c=>`<tr class="${c[0]==lum&&c[1]==acc?'on':''}"><td>${c[0]?'oui':'non'}</td><td>${c[1]?'oui':'non'}</td><td>${c[2]}</td></tr>`).join('')}</tbody></table><p class="note">Milieu sans CO₂ dans tous les cas.</p>`;
+  q(r,'[data-out]').innerHTML=on?`<p>Dégagement d'O₂ et réduction des ions Fe³⁺ en Fe²⁺. Le dégagement ralentit quand l'accepteur est épuisé.</p><p><span class="eq">2 H₂O + 4 Fe³⁺ → O₂ + 4 H⁺ + 4 Fe²⁺</span></p>`:`<p>Pas de dégagement d'O₂ : il faut à la fois de la <b>lumière</b> et un <b>accepteur d'électrons</b>.</p>`}
+ onSeg(r,'l',v=>{lum=+v;draw()});onSeg(r,'a',v=>{acc=+v;draw()});draw()};
+
+SIMS.ruben=r=>{let e='1';
+ const D={1:{rx:`6 CO₂ + 12 H₂<span class="hot">¹⁸O</span> → C₆H₁₂O₆ + 6 <span class="hot">¹⁸O₂</span> + 6 H₂O`,v:[.85,.20,.84]},2:{rx:`6 C<span class="hot">¹⁸O₂</span> + 12 H₂O → C₆H₁₂<span class="hot">¹⁸O₆</span> + 6 O₂ + 6 H₂<span class="hot">¹⁸O</span>`,v:[.20,.68,.20]}};
+ r.innerHTML=`<div class="ctl">${seg('e',[['1','Lot 1 : eau marquée H₂¹⁸O'],['2','Lot 2 : CO₂ marqué C¹⁸O₂']],e)}</div><div data-f></div><div class="out" data-out></div>`;
+ function draw(){const d=D[e];
+  q(r,'[data-f]').innerHTML=`<p class="rx">${d.rx}</p><div class="scroll"><table class="t"><thead><tr><th></th><th>Eau</th><th>CO₂ (hydrogénocarbonate)</th><th>O₂ dégagé</th></tr></thead><tbody><tr><td>% d'atomes ¹⁸O</td><td>${fmt(d.v[0],2)}</td><td>${fmt(d.v[1],2)}</td><td><b>${fmt(d.v[2],2)}</b></td></tr></tbody></table></div><p class="note">Valeurs indicatives ; la proportion naturelle d'¹⁸O est d'environ 0,20 %.</p>`;
+  q(r,'[data-out]').innerHTML=e=='1'?`<p>Le O₂ dégagé a la même teneur en ¹⁸O que l'<b>eau</b> : il provient de l'eau.</p>`:`<p>Le O₂ dégagé n'est pas enrichi en ¹⁸O : il ne provient <b>pas du CO₂</b>. L'oxygène du CO₂ passe dans la matière organique et dans l'eau formée.</p>`}
+ onSeg(r,'e',v=>{e=v;draw()});draw()};
+
+SIMS.calvin=r=>{const TM=['2 s','5 s','10 s','30 s','1 min','5 min'];let ti=0,cond='lum';
+ const SP=[['APG',70,70,0],['Trioses phosphates',150,100,1],['Hexoses phosphates',100,160,2],['RuBP',230,70,3],['Saccharose',240,165,4],['Acides aminés',165,200,4],['Acides organiques',270,120,5]];
+ r.innerHTML=`<div class="ctl">${sl('t',"Durée d'exposition au ¹⁴CO₂ :",0,5,1,0,'')}</div><div class="two"><div data-f></div><div data-l></div></div><h3>Variation des teneurs en APG et en RuBP</h3><div class="ctl">${seg('c',[['lum',"Passage à l'obscurité"],['co2','Baisse du CO₂']],cond)}</div><div data-g></div><div class="out" data-out></div>`;
+ function chrom(){let s=`<svg viewBox="0 0 340 250" class="pic" role="img" aria-label="Autoradiographie d'un chromatogramme bidimensionnel"><rect x="20" y="15" width="310" height="215" class="fsurf sk"/><circle cx="36" cy="214" r="4" class="fink"/><text x="44" y="245">sens du solvant 1</text><text transform="translate(13 190) rotate(-90)">solvant 2</text>`;
+  SP.forEach(([n,x,y,a])=>{if(a>ti)return;const big=n=='APG'?Math.max(9,20-ti*2):7+Math.min(ti-a,3)*2;s+=`<ellipse cx="${x}" cy="${y}" rx="${big}" ry="${big*.75}" class="fink" style="opacity:.85"/><text x="${x}" y="${y+big+13}" text-anchor="middle" style="font-size:11px">${n}</text>`});
+  q(r,'[data-f]').innerHTML=s+'</svg>';
+  q(r,'[data-l]').innerHTML=`<p class="lbl">Molécules radioactives après ${TM[ti]}</p><ul>${SP.filter(p=>p[3]<=ti).map(p=>`<li>${p[0]}</li>`).join('')}</ul><p class="note">${ti==0?"Après 2 s, presque toute la radioactivité se trouve dans l'APG : c'est la première molécule organique stable formée.":"La radioactivité passe progressivement de l'APG aux autres molécules."}</p>`}
+ function curves(){const e=t=>t<10?0:1-Math.exp(-(t-10)/1.2);let A,R,lb;
+  if(cond=='lum'){A=t=>1+1.3*e(t);R=t=>1-.9*e(t);lb='obscurité'}else{A=t=>1-.85*e(t);R=t=>1+1.2*e(t);lb='CO₂ faible'}
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:20,y0:0,y1:2.5,xt:[0,5,10,15,20],yt:[0,.5,1,1.5,2,2.5],xl:'Temps (min)',yl:'Teneur (unités relatives)',bands:[{a:10,b:20,l:lb}],series:[{pts:fn(0,20,.25,A),c:'var(--u2)',l:'APG'},{pts:fn(0,20,.25,R),c:'var(--u1)',l:'RuBP',dash:1}],al:'Teneurs en APG et en RuBP'});
+  q(r,'[data-out]').innerHTML=(cond=='lum'?`<p>À l'obscurité, l'APG s'accumule et le RuBP disparaît : la transformation de l'APG exige l'<b>ATP</b> et le <b>NADPH,H⁺</b> produits à la lumière, alors que la fixation du CO₂ sur le RuBP continue un moment.</p>`:`<p>Quand le CO₂ manque, le RuBP n'est plus consommé et s'accumule, tandis que l'APG, qui n'est plus formé, diminue : le RuBP est l'<b>accepteur du CO₂</b>.</p>`)+`<p><span class="eq">RuBP (C5) + CO₂ → 2 APG (C3)</span></p>`}
+ onSl(r,'t',v=>{ti=v;q(r,'[data-o="t"]').textContent=TM[v];chrom()});q(r,'[data-o="t"]').textContent=TM[0];
+ onSeg(r,'c',v=>{cond=v;curves()});chrom();curves()};
+
+SIMS.arnon=r=>{let pre=1;
+ r.innerHTML=`<div class="ctl">${seg('p',[['1','Chloroplastes éclairés au préalable'],['0','Chloroplastes non éclairés']],'1')}</div><div data-g></div><div class="out" data-out></div>`;
+ function draw(){const f=t=>t<10||!pre?0:100*(1-Math.exp(-(t-10)/.9));
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:20,y0:0,y1:120,xt:[0,5,10,15,20],yt:[0,30,60,90,120],xl:'Temps (min)',yl:'¹⁴C fixé (unités relatives)',bands:pre?[{a:0,b:10,l:'lumière, sans CO₂',nf:1},{a:10,b:20,l:'obscurité + ¹⁴CO₂'}]:[{a:0,b:10,l:'obscurité, sans CO₂'},{a:10,b:20,l:'obscurité + ¹⁴CO₂'}],series:[{pts:fn(0,20,.2,f),c:'var(--u2)',l:'¹⁴C incorporé'},{pts:fn(0,20,.5,t=>t<10?0:11*(t-10)),c:'var(--muted)',dash:1,l:'témoin : lumière et ¹⁴CO₂ en continu'}],al:'Fixation du carbone radioactif'});
+  q(r,'[data-out]').innerHTML=pre?`<p>Le ¹⁴CO₂ est fixé à l'obscurité pendant environ deux minutes, puis la fixation s'arrête : elle utilise des composés (ATP, NADPH,H⁺) produits pendant l'éclairement préalable, et cesse quand ils sont épuisés.</p>`:`<p>Sans éclairement préalable, aucun ¹⁴CO₂ n'est fixé : la phase de fixation dépend des produits de la phase lumineuse.</p>`}
+ onSeg(r,'p',v=>{pre=+v;draw()});draw()};
+
+/* ---------- Unité 3 : communications hormonale et nerveuse ---------- */
+SIMS.pancreas=r=>{let sc='abl';
+ const S={abl:'Ablation seule',gref:'Ablation, greffe puis retrait du greffon',ins:"Ablation puis injections d'insuline"};
+ r.innerHTML=`<div class="ctl">${seg('s',Object.entries(S),sc)}</div><div data-g></div><div class="out" data-out></div>`;
+ const a=t=>t<2?1:1+2.1*(1-Math.exp(-(t-2)/1.3)),v8=a(8);
+ const F={abl:a,gref:t=>t<8?a(t):t<15?1+(v8-1)*Math.exp(-(t-8)/.6):1+2.1*(1-Math.exp(-(t-15)/1.3)),ins:t=>t<8?a(t):1+(v8-1)*Math.exp(-(t-8)/.5)};
+ const EV={abl:[[2,'ablation']],gref:[[2,'ablation'],[8,'greffe'],[15,'retrait']],ins:[[2,'ablation'],[8,'insuline']]};
+ const O={abl:`Après l'ablation : <b>hyperglycémie</b> durable (au-delà de 3 g/L), glycosurie, polyurie, soif intense, amaigrissement ; sans traitement, l'animal meurt en quelques semaines.`,gref:`La greffe sous la peau d'un fragment de pancréas, sans connexion nerveuse, corrige l'hyperglycémie ; le retrait du greffon la fait réapparaître. Le pancréas agit donc par <b>voie sanguine</b> (hormone).`,ins:`Les injections d'insuline ramènent la glycémie vers 1 g/L : l'<b>insuline</b> est l'hormone pancréatique hypoglycémiante.`};
+ function draw(){
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:20,y0:0,y1:3.5,xt:[0,5,10,15,20],yt:[0,.5,1,1.5,2,2.5,3,3.5],hl:[1.8],xl:'Temps (jours)',yl:'Glycémie (g/L)',series:[{pts:fn(0,20,.1,F[sc]),c:'var(--u3)'}],al:'Évolution de la glycémie du chien',extra:(X,Y)=>EV[sc].map(([t,l])=>`<path d="M${X(t)} ${Y(3.5)} V${Y(0)}" class="ref"/><text x="${X(t)+4}" y="${Y(3.35)}" class="mkl" style="font-size:11px">${l}</text>`).join('')+`<text x="${X(19.8)}" y="${Y(1.8)-6}" text-anchor="end">seuil rénal</text>`});
+  q(r,'[data-out]').innerHTML=`<p>${O[sc]}</p><p class="note">Au-delà du seuil rénal (environ 1,8 g/L), le glucose passe dans l'urine : glycosurie.</p>`}
+ onSeg(r,'s',v=>{sc=v;draw()});draw()};
+
+SIMS.hgpo=r=>{
+ const lin=P=>t=>{const n=P.length-1;for(let i=0;i<n;i++){const a=P[i][0],b=P[i+1][0];if(t>=a&&t<=b){const u=(t-a)/(b-a),y0=P[Math.max(0,i-1)][1],y1=P[i][1],y2=P[i+1][1],y3=P[Math.min(n,i+2)][1];return .5*(2*y1+(y2-y0)*u+(2*y0-5*y1+4*y2-y3)*u*u+(3*y1-y0-3*y2+y3)*u*u*u)}}return P[n][1]};
+ const G={s:lin([[0,.9],[30,1.35],[60,1.4],[90,1.15],[120,.95],[150,.88],[180,.9]]),d:lin([[0,1.5],[30,2.1],[60,2.6],[90,2.8],[120,2.6],[150,2.4],[180,2.2]])};
+ const I={s:lin([[0,8],[30,55],[60,60],[90,40],[120,20],[150,12],[180,9]]),d:lin([[0,4],[30,6],[60,7],[90,6],[120,5],[150,5],[180,4]])};
+ r.innerHTML=`<div class="ctl"><label class="ck"><input type="checkbox" data-k="s" checked>Sujet sain</label><label class="ck"><input type="checkbox" data-k="d" checked>Sujet diabétique (type 1)</label></div><div class="two"><div data-g></div><div data-i></div></div><div class="out" data-out></div>`;
+ function draw(){const ks=['s','d'].filter(k=>q(r,`[data-k="${k}"]`).checked),se=F=>ks.map(k=>({pts:fn(0,180,3,F[k]),c:k=='s'?'var(--u2)':'var(--u3)',dash:k=='d',l:k=='s'?'sujet sain':'sujet diabétique'}));
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:180,y0:0,y1:3,xt:[0,30,60,90,120,150,180],yt:[0,.5,1,1.5,2,2.5,3],hl:[1.26],xl:'Temps après ingestion (min)',yl:'Glycémie (g/L)',series:se(G),al:"Glycémie après ingestion de glucose"});
+  q(r,'[data-i]').innerHTML=plot({x0:0,x1:180,y0:0,y1:70,xt:[0,30,60,90,120,150,180],yt:[0,20,40,60],xl:'Temps après ingestion (min)',yl:'Insulinémie (µU/mL)',series:se(I),al:"Insulinémie après ingestion de glucose"});
+  q(r,'[data-out]').innerHTML=`<p>Sujet sain : la hausse de la glycémie déclenche une forte sécrétion d'insuline ; la glycémie revient à sa valeur initiale en 2 à 3 heures.</p><p>Sujet diabétique de type 1 : insulinémie très faible ; la glycémie, déjà élevée à jeun (au-delà de 1,26 g/L, ligne pointillée), reste élevée.</p>`}
+ r.querySelectorAll('[data-k]').forEach(x=>x.addEventListener('change',draw));draw()};
+
+SIMS.foie=r=>{let st=0;
+ const A=['Laver le foie par la veine porte','Attendre 24 h puis relaver le foie','Recommencer'];
+ r.innerHTML=`<div class="ctl">${btn('go','')}</div><div class="two"><div data-g></div><div data-t></div></div><div class="out" data-out></div>`;
+ const s1=t=>1.2*Math.exp(-t/8),s2=t=>.7*Math.exp(-(t-50)/10);
+ const tube=(c,l)=>`<div style="text-align:center"><svg viewBox="0 0 60 120" style="width:64px;height:128px" role="img" aria-label="Tube de test"><path d="M12 40 V95 Q12 110 30 110 Q48 110 48 95 V40" style="fill:${c}"/><path d="M12 10 V95 Q12 110 30 110 Q48 110 48 95 V10" class="glass"/></svg><p class="note" style="margin:0">${l}</p></div>`;
+ function draw(){q(r,'[data-b="go"]').textContent=A[st];
+  const se=[];if(st>=1)se.push({pts:fn(0,40,1,s1),c:'var(--u3)',l:'1er lavage'});if(st>=2)se.push({pts:fn(50,90,1,s2),c:'var(--u1)',dash:1,l:'2e lavage, 24 h plus tard'});
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:90,y0:0,y1:1.4,xt:[[0,'0'],[20,'20'],[40,'40'],[50,'0'],[70,'20'],[90,'40']],yt:[0,.4,.8,1.2],xl:'Durée de chaque lavage (min)',yl:"Glucose dans l'eau (g/L)",bands:[{a:40,b:50,l:'24 h'}],series:se,al:"Glucose dans l'eau de lavage"});
+  q(r,'[data-t]').innerHTML=`<p class="lbl">Test à la liqueur de Fehling (à chaud)</p><div style="display:flex;gap:18px;justify-content:center">${tube(st>=1?'#2E6DB4':'var(--line)','fin du 1er lavage')}${tube(st>=2?'#B5462A':'var(--line)','début du 2e lavage')}</div>`;
+  q(r,'[data-out]').innerHTML=[`<p>Foie frais prélevé sur un animal bien nourri.</p>`,`<p>Le glucose de l'eau de lavage diminue puis <b>disparaît</b> : la liqueur de Fehling reste <b>bleue</b>.</p>`,`<p>Après 24 h, l'eau de lavage contient de nouveau du glucose : précipité <b>rouge brique</b>. Le foie a produit du glucose à partir de sa réserve de <b>glycogène</b> (glycogénolyse).</p>`][st]}
+ onBtn(r,'go',()=>{st=(st+1)%3;draw()});draw()};
+
+SIMS.magendie=r=>{let cut='d',sti='n';
+ r.innerHTML=`<div class="ctl">${seg('c',[['d','Section de la racine dorsale'],['v','Section de la racine ventrale']],cut)}${seg('s',[['n','Observation'],['c','Stimuler le bout central'],['p','Stimuler le bout périphérique']],sti)}</div><div data-f style="max-width:600px"></div><div class="out" data-out></div>`;
+ const R={dn:`Perte de la <b>sensibilité</b> du territoire innervé ; la motricité est conservée.`,dc:`L'animal réagit (douleur, mouvements) : le message atteint la moelle épinière.`,dp:`Aucune réaction.`,vn:`<b>Paralysie</b> des muscles du territoire innervé ; la sensibilité est conservée.`,vc:`Aucune réaction.`,vp:`<b>Contraction</b> des muscles du territoire innervé.`};
+ function draw(){let s=`<svg viewBox="0 0 420 250" class="pic" role="img" aria-label="Moelle épinière et racines d'un nerf rachidien">`;
+  s+=`<ellipse cx="100" cy="128" rx="72" ry="62" class="fsurf sk" style="stroke-width:2"/><path d="M72 88 Q100 112 128 88 L136 104 Q114 128 136 152 L128 168 Q100 144 72 168 L64 152 Q86 128 64 104 Z" class="fg4"/>`;
+  s+=`<path d="M150 98 L205 80" style="stroke:var(--u3);stroke-width:5;fill:none"/><ellipse cx="226" cy="74" rx="20" ry="12" style="fill:var(--u3)"/><path d="M246 70 Q290 66 318 118" style="stroke:var(--u3);stroke-width:5;fill:none"/>`;
+  s+=`<path d="M150 160 L220 160 Q290 158 318 122" style="stroke:var(--u1);stroke-width:5;fill:none"/><path d="M318 120 H414" style="stroke:var(--ink);stroke-width:7"/>`;
+  s+=`<text x="168" y="58">racine dorsale</text><text x="226" y="102" text-anchor="middle">ganglion</text><text x="176" y="186">racine ventrale</text><text x="414" y="144" text-anchor="end">nerf rachidien</text><text x="100" y="212" text-anchor="middle">moelle épinière</text>`;
+  const P=cut=='d'?{x:178,y:89,a:-18}:{x:186,y:160,a:0};
+  s+=`<g transform="translate(${P.x} ${P.y}) rotate(${P.a})"><path d="M-4 -12 V12 M4 -12 V12" class="cut"/>${sti=='n'?'':`<path d="M${sti=='c'?-16:16} -34 l-6 11 h8 l-6 12" style="stroke:var(--hot);stroke-width:2.5;fill:none"/>`}</g></svg>`;
+  q(r,'[data-f]').innerHTML=s;
+  q(r,'[data-out]').innerHTML=`<p>${R[cut+sti]}</p><p class="note">Bout central : segment resté relié à la moelle. Bout périphérique : segment relié au nerf et aux organes. Trait rouge double : section ; éclair : point de stimulation.</p>`}
+ onSeg(r,'c',v=>{cut=v;draw()});onSeg(r,'s',v=>{sti=v;draw()});draw()};
+
+SIMS.potent=r=>{let md='f',I=4;
+ r.innerHTML=`<div class="ctl">${seg('m',[['f','Fibre isolée'],['n','Nerf entier']],md)}${sl('i','Intensité de stimulation :',0,10,.5,I,'(unités arbitraires)')}</div><div class="two"><div data-g></div><div data-a></div></div><div class="out" data-out></div>`;
+ const amp=(m,i)=>m=='f'?(i>=3?100:0):(i<2?0:i>=7?4:4*(i-2)/5);
+ const wf=(m,i)=>t=>{const art=i>0?(m=='f'?4:.35)*Math.exp(-(((t-.5)/.04)**2)):0;
+  if(m=='f'){if(i<3)return -70+art+(i/3)*6*Math.exp(-(((t-.8)/.25)**2));return -70+art+100*Math.exp(-(((t-1.7)/.28)**2))-12*Math.exp(-(((t-2.7)/.5)**2))}
+  return art+amp(m,i)*Math.exp(-(((t-1.8)/.35)**2))};
+ function draw(){const f=md=='f';
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:6,y0:f?-90:-.5,y1:f?40:5,xt:[0,1,2,3,4,5,6],yt:f?[-90,-70,-50,-30,-10,10,30]:[0,1,2,3,4,5],xl:'Temps (ms)',yl:f?'Potentiel de membrane (mV)':'Potentiel global (mV)',series:[{pts:fn(0,6,.02,wf(md,I)),c:'var(--u3)',w:2.2}],al:"Enregistrement à l'oscilloscope"});
+  q(r,'[data-a]').innerHTML=plot({x0:0,x1:10,y0:0,y1:f?120:5,xt:[0,2,4,6,8,10],yt:f?[0,20,40,60,80,100,120]:[0,1,2,3,4,5],xl:'Intensité de stimulation',yl:'Amplitude de la réponse (mV)',series:[{pts:fn(0,10,.05,x=>amp(md,x)),c:'var(--u3)'}],marks:[{x:I,y:amp(md,I)}],al:"Amplitude de la réponse selon l'intensité"});
+  q(r,'[data-out]').innerHTML=f?(I<3?`<p>Stimulation <b>infraliminaire</b> (seuil = 3) : pas de potentiel d'action, seulement une légère dépolarisation locale. Le potentiel de repos est d'environ −70 mV.</p>`:`<p>Au-delà du seuil, le potentiel d'action a toujours la même amplitude (environ 100 mV) : c'est la <b>loi du tout ou rien</b>. Phases : dépolarisation, repolarisation, hyperpolarisation, retour au repos.</p>`):(I<2?`<p>Stimulation inférieure au seuil de la fibre la plus excitable : pas de réponse.</p>`:I<7?`<p>L'amplitude du potentiel global <b>augmente avec l'intensité</b> : de plus en plus de fibres, de seuils différents, sont recrutées.</p>`:`<p>Toutes les fibres du nerf sont recrutées : l'amplitude est <b>maximale</b> et n'augmente plus.</p>`)}
+ onSeg(r,'m',v=>{md=v;draw()});onSl(r,'i',v=>{I=v;draw()});draw()};
+
+SIMS.vitesse=r=>{
+ r.innerHTML=`<div class="grid4"><label>Distance d₁ de R₁ (mm)<input type="number" step="1" data-k="d1" value="20"></label><label>Latence t₁ (ms)<input type="number" step="0.1" data-k="t1" value="0.8"></label><label>Distance d₂ de R₂ (mm)<input type="number" step="1" data-k="d2" value="50"></label><label>Latence t₂ (ms)<input type="number" step="0.1" data-k="t2" value="1.8"></label></div><div data-g></div><div class="out" data-out></div>`;
+ const g=k=>+q(r,`[data-k="${k}"]`).value||0;
+ function draw(){const t1=g('t1'),t2=g('t2'),d1=g('d1'),d2=g('d2'),w=t0=>t=>t<t0?0:3*Math.exp(-(((t-t0-.45)/.18)**2));
+  q(r,'[data-g]').innerHTML=plot({x0:0,x1:4,y0:-.3,y1:3.5,xt:[0,1,2,3,4],yt:[0,1,2,3],xl:'Temps après la stimulation (ms)',yl:'Potentiel (mV)',series:[{pts:fn(0,4,.02,w(t1)),c:'var(--u3)',l:`électrode R₁ (${fmtn(d1)} mm)`},{pts:fn(0,4,.02,w(t2)),c:'var(--u1)',dash:1,l:`électrode R₂ (${fmtn(d2)} mm)`}],al:'Réponses enregistrées par deux électrodes'});
+  const dt=t2-t1;
+  q(r,'[data-out]').innerHTML=dt>0&&d2>d1?`<p>v = (d₂ − d₁) / (t₂ − t₁) = (${fmtn(d2)} − ${fmtn(d1)}) mm / (${fmtn(t2)} − ${fmtn(t1)}) ms = <b>${fmt((d2-d1)/dt,1)} m/s</b> (1 mm/ms = 1 m/s).</p>`:`<p>Saisissez d₂ supérieure à d₁ et t₂ supérieure à t₁.</p>`}
+ r.querySelectorAll('[data-k]').forEach(x=>x.addEventListener('input',draw));draw()};
+
+/* ---------- Contenu ---------- */
+const UN={1:['Phénomènes géologiques externes','var(--u1)'],2:["Production de la matière organique et flux d'énergie",'var(--u2)'],3:['Communications hormonale et nerveuse','var(--u3)']};
+const CH={'1.1':'Réalisation de la carte paléogéographique','1.2':"Histoire géologique d'une région sédimentaire",'1.3':'Fondements de la carte géologique','2.1':"Absorption de l'eau et des sels minéraux",'2.2':'Échanges gazeux chlorophylliens','2.3':'Production de la matière organique','2.4':'Rôle des pigments chlorophylliens','2.5':'Principales réactions de la photosynthèse','3.1':'Communication hormonale : régulation de la glycémie','3.2':'Communication nerveuse'};
+const EXP=[
+{id:'granulo',ch:'1.1',sim:'granulo',t:`Analyse granulométrique d'un sable`,
+obj:`Déterminer la répartition des grains selon leur taille, en déduire le degré de tri du sédiment et l'agent de transport.`,
+mat:`Colonne de tamis à mailles décroissantes (2 à 0,063 mm), balance, 100 g de sable sec, papier semi-logarithmique.`,
+p:[`Sécher puis peser 100 g de sable.`,`Verser l'échantillon sur le tamis supérieur et agiter la colonne pendant 10 minutes.`,`Peser le refus de chaque tamis et le contenu du fond.`,`Calculer les pourcentages cumulés des refus.`,`Tracer la courbe cumulative (diamètre en abscisse logarithmique) et lire les quartiles Q25, Q50 et Q75.`],
+r:`<p>La forme de la courbe dépend de l'origine du sable : très redressée pour le sable de dune, redressée pour le sable de plage, étalée pour le sable de rivière.</p>`,
+i:`<p>Plus la courbe est redressée, plus les grains ont des tailles voisines : le sédiment est bien trié. Le tri dépend de l'agent de transport : le vent trie très bien, les vagues bien, les cours d'eau, d'énergie variable, mal. La granulométrie renseigne donc sur le milieu de dépôt, élément de la carte paléogéographique.</p>`,
+q:[`Quel sable est le mieux trié ? Justifiez à l'aide de la forme de la courbe et de la valeur de So.`,`Quelle relation établissez-vous entre le degré de tri d'un sédiment et l'agent qui l'a transporté ?`]},
+{id:'morpho',ch:'1.1',sim:'morpho',t:`Morphoscopie des grains de quartz`,
+obj:`Relier l'aspect des grains de quartz (forme, état de surface) à l'agent et à la durée du transport.`,
+mat:`Échantillons de sable, acide chlorhydrique dilué, loupe binoculaire, fond noir.`,
+p:[`Laver le sable à l'acide chlorhydrique dilué pour éliminer le calcaire, rincer à l'eau et sécher.`,`Étaler les grains sur un fond noir.`,`Observer à la loupe binoculaire une centaine de grains de quartz.`,`Classer les grains : non usés (NU), émoussés-luisants (EL), ronds-mats (RM).`,`Calculer le pourcentage de chaque catégorie.`],
+r:`<div class="scroll"><table class="t"><thead><tr><th>Type de grain</th><th>Aspect</th><th>Transport</th></tr></thead><tbody><tr><td>Non usé (NU)</td><td>Anguleux, arêtes vives</td><td>Faible ou nul</td></tr><tr><td>Émoussé-luisant (EL)</td><td>Arrondi, surface lisse et brillante</td><td>Par l'eau</td></tr><tr><td>Rond-mat (RM)</td><td>Sphérique, surface dépolie</td><td>Par le vent</td></tr></tbody></table></div>`,
+i:`<p>La forme et l'état de surface des grains enregistrent leur histoire : l'eau amortit les chocs et polit les grains, qui deviennent luisants ; dans l'air, les grains s'entrechoquent violemment et leur surface devient mate. La catégorie dominante indique le milieu de dépôt.</p>`,
+q:[`Pourquoi les grains transportés par le vent sont-ils mats, alors que ceux transportés par l'eau sont luisants ?`,`Un sable contient 70 % de grains ronds-mats : dans quel milieu s'est-il probablement déposé ?`]},
+{id:'decant',ch:'1.1',sim:'decant',t:`Sédimentation d'un mélange dans l'eau`,
+obj:`Montrer que les particules se déposent selon leur taille lorsque l'énergie du milieu diminue.`,
+mat:`Grande éprouvette, eau, mélange de gravier, de sable et d'argile.`,
+p:[`Verser le mélange dans l'éprouvette remplie d'eau.`,`Boucher et agiter vigoureusement.`,`Laisser reposer et observer l'ordre de dépôt pendant quelques minutes.`],
+r:`<p>Le gravier se dépose d'abord, puis le sable ; l'argile reste longtemps en suspension, l'eau est trouble, avant de se déposer au sommet.</p>`,
+i:`<p>La vitesse de chute d'une particule augmente avec sa taille et sa densité. Quand l'énergie du courant diminue, les éléments grossiers se déposent en premier : c'est le <b>granoclassement</b>, particules de plus en plus fines de bas en haut. Une couche granoclassée témoigne d'un ralentissement progressif du courant.</p>`,
+q:[`Classez les particules selon leur vitesse de chute. Quel facteur explique cet ordre ?`,`Une couche montre des éléments grossiers à la base et fins au sommet : que peut-on en déduire sur l'énergie du courant ?`]},
+{id:'calci',ch:'1.1',sim:'calci',t:`Dosage du calcaire au calcimètre de Bernard`,
+obj:`Déterminer le pourcentage de carbonate de calcium d'une roche pour la nommer et préciser son milieu de formation.`,
+mat:`Calcimètre de Bernard, acide chlorhydrique dilué, carbonate de calcium pur (témoin), balance, échantillons de roches broyées.`,
+p:[`Réaliser le témoin : faire réagir une masse m₀ de CaCO₃ pur avec HCl et lire le volume de CO₂ dégagé V₀.`,`Recommencer avec une masse m de l'échantillon broyé et lire le volume V.`,`Calculer : % CaCO₃ = (V × m₀ × 100) / (V₀ × m).`,`Nommer la roche d'après son taux de calcaire.`],
+r:`<p>Le volume de CO₂ dégagé est proportionnel à la masse de calcaire contenue dans l'échantillon : CaCO₃ + 2 HCl → CaCl₂ + CO₂ + H₂O.</p>`,
+i:`<p>Le taux de CaCO₃ permet de nommer la roche : argile, marne, calcaire… Les calcaires se forment surtout en mer chaude et peu profonde, loin des apports détritiques ; les argiles et les marnes traduisent des apports continentaux fins. Ce dosage complète la reconstitution du milieu de sédimentation.</p>`,
+q:[`Un échantillon de 0,5 g dégage 30 mL de CO₂ ; le témoin (0,2 g de CaCO₃ pur) dégage 48 mL. Calculez son taux de calcaire et nommez la roche.`,`Pourquoi réalise-t-on un témoin avec du carbonate de calcium pur ?`]},
+{id:'chaux',ch:'1.1',sim:'chaux',t:`Précipitation et dissolution du calcaire`,
+obj:`Identifier les facteurs qui contrôlent la dissolution et la précipitation du calcaire.`,
+mat:`Eau de chaux, tube à essai, paille, bec Bunsen ou réchaud.`,
+p:[`Souffler de l'air expiré dans l'eau de chaux et observer.`,`Continuer à souffler pendant plusieurs minutes.`,`Chauffer la solution redevenue limpide.`],
+r:`<p>Un trouble blanc apparaît, puis disparaît quand on continue à souffler, puis réapparaît au chauffage.</p>`,
+i:`<p>La réaction CaCO₃ + CO₂ + H₂O ⇌ Ca(HCO₃)₂ est réversible. Ce qui augmente le CO₂ dissous (eau froide, pression élevée) favorise la dissolution du calcaire ; ce qui en diminue la teneur (réchauffement, agitation, baisse de pression, photosynthèse des algues) provoque sa précipitation. On explique ainsi la formation des calcaires d'origine chimique (travertins, stalactites) et biochimique.</p>`,
+q:[`Écrivez l'équation qui résume les étapes 2 et 3 sous la forme d'un équilibre.`,`Expliquez, à l'aide de cette expérience, la formation des stalactites dans une grotte.`]},
+{id:'fossiles',ch:'1.1',t:`Fossiles de faciès et principe d'actualisme`,
+obj:`Déduire le milieu de vie ancien à partir des fossiles, en le comparant aux organismes actuels.`,
+mat:`Collection de fossiles ou photographies, documents sur les conditions de vie des espèces actuelles apparentées.`,
+p:[`Observer et identifier les fossiles contenus dans la roche.`,`Rechercher les organismes actuels apparentés et leurs conditions de vie.`,`Appliquer le principe d'actualisme : les phénomènes actuels permettent d'expliquer ceux du passé.`],
+r:`<div class="scroll"><table class="t"><thead><tr><th>Fossile</th><th>Milieu indiqué</th></tr></thead><tbody><tr><td>Coraux constructeurs de récifs</td><td>Mer chaude (plus de 20 °C), peu profonde, eau claire</td></tr><tr><td>Huîtres</td><td>Milieu littoral, eau peu profonde</td></tr><tr><td>Oursins, crinoïdes</td><td>Milieu marin de salinité normale</td></tr><tr><td>Limnées, planorbes</td><td>Eau douce (lac, étang)</td></tr><tr><td>Fougères arborescentes</td><td>Milieu continental chaud et humide</td></tr></tbody></table></div>`,
+i:`<p>Un fossile de faciès appartient à un groupe aux exigences écologiques étroites : il renseigne sur le milieu de dépôt (marin, lacustre, continental) et sur ses conditions (température, profondeur, salinité). Associé aux données sédimentologiques, il permet de tracer la carte paléogéographique.</p>`,
+q:[`Qu'est-ce qu'un fossile de faciès ? Donnez deux exemples.`,`Énoncez le principe d'actualisme et montrez ses limites.`]},
+{id:'transg',ch:'1.2',sim:'transg',t:`Modélisation d'une transgression et d'une régression`,
+obj:`Comprendre comment les variations du niveau marin modifient la succession verticale des faciès en un lieu donné.`,
+mat:`Simulation, ou bac à sédiments incliné, eau, sables et argiles.`,
+p:[`Choisir un niveau marin, puis déposer une couche au site étudié.`,`Répéter en faisant monter progressivement le niveau marin.`,`Recommencer en le faisant baisser.`,`Comparer les deux colonnes stratigraphiques obtenues.`],
+r:`<p>Quand le niveau marin monte, les faciès se succèdent de bas en haut du plus grossier (littoral) au plus fin (large) ; c'est l'inverse quand il baisse.</p>`,
+i:`<p>Une <b>transgression</b>, avancée de la mer sur le continent, produit une série de faciès de plus en plus profonds vers le haut, reposant souvent sur un conglomérat de base. Une <b>régression</b> donne une série de faciès de moins en moins profonds et peut s'achever par une émersion : lacune de sédimentation, érosion.</p>`,
+q:[`Construisez une série transgressive puis une série régressive. Décrivez l'évolution de la taille des grains de bas en haut.`,`Que signifie la présence d'un conglomérat à la base d'une série marine ?`]},
+{id:'chrono',ch:'1.2',sim:'chrono',t:`Datation relative : superposition, recoupement, inclusion`,
+obj:`Reconstituer la chronologie des événements d'une coupe géologique grâce aux principes de la stratigraphie.`,
+mat:`Coupe géologique (document ou simulation).`,
+p:[`Observer la coupe : couches, faille, filon, surface d'érosion.`,`Appliquer le principe de superposition aux couches sédimentaires.`,`Appliquer le principe de recoupement aux structures qui traversent les couches.`,`Classer les événements du plus ancien au plus récent, puis vérifier.`],
+r:`<p>Ordre : couche A, couche B, couche C, filon G, faille F, érosion, puis dépôt de la couche D.</p>`,
+i:`<p><b>Superposition</b> : une couche est plus récente que celle qu'elle recouvre. <b>Recoupement</b> : une structure (filon, faille) est postérieure aux couches qu'elle recoupe. <b>Inclusion</b> : les éléments inclus, comme les galets d'un conglomérat, sont plus anciens que la roche qui les contient. La surface d'érosion traduit une émersion.</p>`,
+q:[`Énoncez les principes de superposition et de recoupement.`,`Pourquoi la couche D est-elle forcément postérieure à la faille F ?`]},
+{id:'discord',ch:'1.2',t:`Modélisation d'une discordance angulaire`,
+obj:`Comprendre la succession d'événements qui conduit à une discordance.`,
+mat:`Pâte à modeler de plusieurs couleurs (ou couches de sable humide colorées), couteau, planchette.`,
+p:[`Superposer plusieurs couches horizontales de pâte à modeler.`,`Plisser ou basculer l'ensemble par une compression latérale.`,`Araser le sommet avec un couteau pour figurer l'érosion.`,`Déposer de nouvelles couches horizontales sur la surface arasée.`,`Réaliser une coupe verticale et observer.`],
+r:`<p>Les nouvelles couches, horizontales, reposent sur les tranches des couches plissées : les pendages des deux ensembles sont différents.</p>`,
+i:`<p>Une discordance angulaire enregistre : dépôt, déformation, émersion et érosion, puis nouvelle transgression. Elle marque une lacune dans l'enregistrement sédimentaire et permet de dater relativement la déformation, postérieure aux couches plissées et antérieure aux couches discordantes.</p>`,
+q:[`Citez, dans l'ordre, les événements enregistrés par une discordance angulaire.`,`Comment dater relativement le plissement à l'aide de la discordance ?`]},
+{id:'correl',ch:'1.2',t:`Identité paléontologique et corrélations`,
+obj:`Mettre en correspondance des couches de régions éloignées grâce à leurs fossiles stratigraphiques.`,
+mat:`Colonnes stratigraphiques de deux ou trois régions, avec leurs fossiles.`,
+p:[`Repérer dans chaque colonne les fossiles stratigraphiques (ammonites, trilobites, nummulites…).`,`Relier les couches qui contiennent les mêmes fossiles stratigraphiques.`,`Identifier les lacunes et les variations d'épaisseur ou de faciès.`],
+r:`<p>Des couches de faciès différents, calcaire dans une région et argile dans une autre, peuvent contenir le même fossile stratigraphique.</p>`,
+i:`<p>Des couches renfermant les mêmes fossiles stratigraphiques ont le même âge : c'est le principe d'<b>identité paléontologique</b>. Un bon fossile stratigraphique a une courte durée d'existence et une large répartition géographique. Les corrélations fondent l'échelle stratigraphique.</p>`,
+q:[`Quelles sont les qualités d'un bon fossile stratigraphique ?`,`Deux couches de faciès différents contiennent la même espèce d'ammonite : que peut-on conclure ?`]},
+{id:'regleV',ch:'1.3',sim:'regleV',t:`Règle des V : affleurement d'une couche dans une vallée`,
+obj:`Déduire le pendage d'une couche à partir de la forme de sa limite d'affleurement sur une carte.`,
+mat:`Carte topographique ou maquette de vallée (polystyrène, pâte à modeler), feuille colorée figurant une couche.`,
+p:[`Représenter une vallée par ses courbes de niveau.`,`Placer une couche horizontale, verticale, puis inclinée vers l'amont et vers l'aval.`,`Observer la forme de l'intersection entre la couche et la surface topographique.`],
+r:`<p>Couche horizontale : limite parallèle aux courbes de niveau. Couche verticale : limite rectiligne. Couche inclinée vers l'amont : V pointant vers l'amont, plus ouvert que les courbes. Couche inclinée vers l'aval, plus que la pente de la vallée : V pointant vers l'aval.</p>`,
+i:`<p>La forme de la limite d'affleurement dépend du pendage de la couche et de la topographie. La règle des V permet de lire sur une carte géologique le sens du pendage des couches.</p>`,
+q:[`Comment reconnaître sur une carte une couche horizontale ? une couche verticale ?`,`Dans quel cas le V d'affleurement pointe-t-il vers l'aval ?`]},
+{id:'coupe',ch:'1.3',t:`Réalisation d'une coupe géologique`,
+obj:`Construire le profil topographique puis la coupe géologique selon un trait de coupe.`,
+mat:`Carte géologique, papier millimétré, règle, crayons de couleur.`,
+p:[`Tracer le trait de coupe AB sur la carte.`,`Reporter sur papier millimétré les intersections de AB avec les courbes de niveau et construire le profil topographique, en choisissant l'échelle des hauteurs.`,`Reporter les limites des couches sur le profil.`,`Tracer les couches selon leur pendage (données de la carte, règle des V), puis les failles.`,`Compléter par la légende, l'orientation et les échelles.`],
+r:`<p>La coupe montre la disposition des couches en profondeur : horizontales, inclinées, plissées ou faillées.</p>`,
+i:`<p>La carte géologique est une représentation en plan ; la coupe apporte la troisième dimension et permet de reconstituer l'histoire géologique de la région : sédimentation, déformations, érosion.</p>`,
+q:[`Pourquoi faut-il choisir une échelle des hauteurs pour construire le profil topographique ?`,`Quelles informations la coupe apporte-t-elle que la carte ne montre pas directement ?`]},
+{id:'racine',ch:'2.1',sim:'racine',t:`Absorption de l'eau par les racines`,
+obj:`Montrer que la plante absorbe l'eau par ses racines et mesurer le volume absorbé.`,
+mat:`Deux éprouvettes graduées, eau, huile, jeune plante (haricot, blé).`,
+p:[`Placer les racines d'une plante dans une éprouvette graduée contenant de l'eau.`,`Recouvrir la surface de l'eau d'une fine couche d'huile pour empêcher l'évaporation.`,`Préparer une éprouvette témoin identique, sans plante.`,`Relever le volume d'eau chaque jour.`],
+r:`<p>Le volume diminue dans l'éprouvette qui contient la plante ; il reste constant dans le témoin.</p>`,
+i:`<p>La diminution du volume n'est due ni à l'évaporation (huile) ni à une autre cause (témoin) : l'eau est <b>absorbée par les racines</b>, puis conduite jusqu'aux feuilles, où l'essentiel est rejeté par transpiration.</p>`,
+q:[`Quel est le rôle de la couche d'huile ? et celui de l'éprouvette témoin ?`,`Calculez le volume moyen d'eau absorbé par jour.`]},
+{id:'poils',ch:'2.1',t:`Zone d'absorption : les poils absorbants`,
+obj:`Localiser la zone de la racine qui absorbe l'eau et les sels minéraux.`,
+mat:`Graines de radis ou de blé germées sur papier humide, loupe, microscope, huile.`,
+p:[`Observer une jeune racine à la loupe et repérer ses zones : coiffe, zone de croissance, zone pilifère, zone subéreuse.`,`Plonger successivement différentes zones de la racine dans l'eau, le reste étant isolé par de l'huile.`,`Observer un poil absorbant au microscope.`],
+r:`<p>La plante ne reste turgescente que si la zone pilifère plonge dans l'eau. Un poil absorbant est une cellule épidermique très allongée, à paroi mince et à grande vacuole.</p>`,
+i:`<p>L'absorption se fait surtout au niveau de la <b>zone pilifère</b>. Les poils absorbants multiplient la surface de contact avec la solution du sol ; leur paroi mince et perméable facilite les échanges.</p>`,
+q:[`Quelles caractéristiques du poil absorbant favorisent l'absorption ?`,`Pourquoi une plante repiquée sans précaution se fane-t-elle ?`]},
+{id:'dutro',ch:'2.1',sim:'dutro',t:`L'osmomètre de Dutrochet`,
+obj:`Mettre en évidence le phénomène d'osmose à travers une membrane semi-perméable.`,
+mat:`Entonnoir fermé par une membrane semi-perméable (cellophane), tube capillaire, bécher, solution de saccharose, eau distillée.`,
+p:[`Remplir l'entonnoir d'une solution de saccharose et le fermer par la membrane.`,`Le plonger dans un bécher d'eau distillée et repérer le niveau initial dans le tube.`,`Relever la hauteur du liquide dans le tube au cours du temps.`,`Faire varier les concentrations intérieure et extérieure.`],
+r:`<p>Le niveau monte quand la solution intérieure est la plus concentrée, descend dans le cas inverse et ne varie pas si les concentrations sont égales.</p>`,
+i:`<p>L'eau traverse la membrane semi-perméable du milieu le moins concentré (hypotonique) vers le milieu le plus concentré (hypertonique) : c'est l'<b>osmose</b>. La montée s'arrête quand la pression hydrostatique de la colonne compense la pression osmotique.</p>`,
+q:[`Dans quel sens l'eau traverse-t-elle la membrane ? Justifiez.`,`Pourquoi le niveau finit-il par se stabiliser ?`]},
+{id:'plasmo',ch:'2.1',sim:'plasmo',t:`Plasmolyse et turgescence`,
+obj:`Observer le comportement de cellules végétales et animales placées dans des milieux de concentrations différentes.`,
+mat:`Épiderme d'oignon rouge, sang (ou images de frottis), solutions de NaCl de concentrations variées, lames, lamelles, microscope.`,
+p:[`Déposer un fragment d'épiderme d'oignon rouge dans une goutte d'eau distillée et l'observer au microscope.`,`Remplacer l'eau par une solution concentrée de NaCl, en l'aspirant avec du papier filtre, et observer.`,`Remettre la préparation dans l'eau distillée.`,`Refaire les observations avec des globules rouges.`],
+r:`<p>Oignon : dans l'eau, la vacuole est volumineuse (turgescence) ; en solution concentrée, elle se rétracte et le cytoplasme se décolle de la paroi (plasmolyse) ; le retour dans l'eau entraîne la déplasmolyse. Globules rouges : éclatement en milieu très dilué (hémolyse), forme normale à 9 g/L, aspect ratatiné en milieu concentré (crénelure).</p>`,
+i:`<p>La membrane plasmique se comporte comme une membrane semi-perméable : l'eau entre dans la cellule placée en milieu hypotonique et en sort en milieu hypertonique. La paroi pectocellulosique empêche l'éclatement de la cellule végétale ; la cellule animale, sans paroi, éclate. La concentration qui provoque la plasmolyse naissante permet d'estimer la pression osmotique du suc vacuolaire.</p>`,
+q:[`Définissez la turgescence et la plasmolyse.`,`Pourquoi la cellule d'oignon n'éclate-t-elle pas dans l'eau distillée, contrairement au globule rouge ?`]},
+{id:'posm',ch:'2.1',sim:'posm',t:`Calcul de la pression osmotique`,
+obj:`Calculer et comparer les pressions osmotiques de deux solutions pour prévoir le sens des échanges d'eau.`,
+mat:`Relation de Van 't Hoff : P = i × C × R × T.`,
+p:[`Choisir le soluté et sa concentration massique (g/L).`,`Calculer la concentration molaire : C = Cm / M.`,`Appliquer P = i × C × R × T, avec i le nombre de particules libérées par molécule, R = 0,082 L·atm·K⁻¹·mol⁻¹ et T en kelvins.`,`Comparer les pressions des deux solutions.`],
+r:`<p>À concentration molaire égale, NaCl (i = 2) exerce une pression osmotique double de celle du glucose (i = 1). Une solution de NaCl à 9 g/L et une solution de glucose à environ 55 g/L sont isotoniques.</p>`,
+i:`<p>La pression osmotique dépend du nombre de particules dissoutes et non de leur nature. L'eau se déplace vers la solution de pression osmotique la plus élevée (hypertonique). Deux solutions de même pression osmotique sont isotoniques.</p>`,
+q:[`Calculez la pression osmotique d'une solution de glucose à 18 g/L à 27 °C.`,`Comparez une solution de NaCl à 5,85 g/L et une solution de glucose à 18 g/L : laquelle est hypertonique ?`]},
+{id:'ions',ch:'2.1',sim:'ions',t:`Absorption des ions : diffusion et transport actif`,
+obj:`Montrer que certaines cellules accumulent des ions contre leur gradient de concentration, et que ce transport consomme de l'énergie.`,
+mat:`Racines d'orge ou algue Nitella, solution de KCl, dispositif d'aération, inhibiteur respiratoire (KCN), dosage du K⁺.`,
+p:[`Placer les racines dans une solution aérée de K⁺ à 1 mmol/L, à 25 °C.`,`Doser régulièrement le K⁺ dans les cellules.`,`Recommencer sans dioxygène, en présence de KCN, ou à 0 °C.`],
+r:`<p>En conditions normales, la concentration de K⁺ dans les cellules dépasse largement celle du milieu. Sans O₂, avec du KCN ou à 0 °C, elle ne dépasse pas la concentration extérieure.</p>`,
+i:`<p>Les ions peuvent entrer passivement, par <b>diffusion</b>, dans le sens de leur gradient. Leur accumulation contre le gradient est un <b>transport actif</b>, assuré par des protéines membranaires qui consomment l'ATP fourni par la respiration cellulaire ; il cesse quand la respiration est bloquée.</p>`,
+q:[`Comparez la concentration du K⁺ dans les cellules et dans le milieu en conditions normales. Que concluez-vous ?`,`Pourquoi l'accumulation cesse-t-elle en l'absence de dioxygène ?`]},
+{id:'elodee',ch:'2.2',sim:'elodee',t:`Dégagement de dioxygène par l'élodée`,
+obj:`Mettre en évidence le rejet de dioxygène par une plante chlorophyllienne éclairée et étudier les facteurs qui l'influencent.`,
+mat:`Élodée, bécher, entonnoir, tube à essai, lampe, hydrogénocarbonate de sodium (NaHCO₃), thermomètre, bûchette.`,
+p:[`Placer des rameaux d'élodée sous un entonnoir renversé, dans un bécher d'eau enrichie en NaHCO₃ (source de CO₂).`,`Coiffer l'entonnoir d'un tube rempli d'eau.`,`Éclairer et compter les bulles dégagées par minute.`,`Faire varier l'éclairement, la température et la teneur en CO₂.`,`Tester le gaz recueilli avec une bûchette incandescente.`],
+r:`<p>Le nombre de bulles augmente avec l'éclairement jusqu'à un palier ; il est très faible sans CO₂ et passe par un optimum de température. Le gaz rallume la bûchette incandescente.</p>`,
+i:`<p>À la lumière, la plante verte absorbe du CO₂ et rejette du <b>dioxygène</b> : ce sont les échanges gazeux chlorophylliens. Leur intensité dépend de <b>facteurs limitants</b> : lumière, CO₂, température.</p>`,
+q:[`Décrivez l'évolution du nombre de bulles en fonction de l'éclairement et identifiez le facteur limitant sur chaque partie de la courbe.`,`Quel est le rôle de l'hydrogénocarbonate de sodium ?`]},
+{id:'exao',ch:'2.2',sim:'exao',t:`Mesure des échanges gazeux par ExAO`,
+obj:`Suivre en continu la teneur en O₂ ou en CO₂ d'une suspension d'algues, à la lumière et à l'obscurité.`,
+mat:`Chaîne ExAO : sonde à O₂ (ou à CO₂), enceinte agitée, suspension de chlorelles, lampe, ordinateur.`,
+p:[`Placer la suspension de chlorelles dans l'enceinte et lancer l'enregistrement.`,`Alterner des périodes d'éclairement et d'obscurité.`,`Mesurer la pente de la courbe dans chaque période.`],
+r:`<p>À la lumière, la teneur en O₂ augmente et celle en CO₂ diminue ; à l'obscurité, c'est l'inverse.</p>`,
+i:`<p>À la lumière, la production d'O₂ par la photosynthèse dépasse sa consommation par la respiration : on mesure une <b>photosynthèse nette</b>. À l'obscurité, seule la respiration a lieu. Photosynthèse brute = photosynthèse nette + respiration.</p>`,
+q:[`Calculez la vitesse de production nette d'O₂ à la lumière et la vitesse de consommation à l'obscurité.`,`Pourquoi parle-t-on de photosynthèse « nette » ? Comment obtenir la photosynthèse brute ?`]},
+{id:'bbt',ch:'2.2',sim:'bbt',t:`Absorption du CO₂ : test au bleu de bromothymol`,
+obj:`Montrer que la plante absorbe du CO₂ à la lumière et en rejette à l'obscurité.`,
+mat:`Quatre tubes, bleu de bromothymol (BBT) vert, élodée, escargot aquatique, papier noir, lampe.`,
+p:[`Remplir quatre tubes de BBT vert (neutre).`,`Tube 1 : élodée à la lumière ; tube 2 : élodée à l'obscurité ; tube 3 : BBT seul à la lumière ; tube 4 : escargot à la lumière.`,`Attendre deux heures et observer la couleur des tubes.`],
+r:`<p>Tube 1 bleu, tube 2 jaune, tube 3 vert, tube 4 jaune.</p>`,
+i:`<p>Le bleuissement du tube 1 montre que l'élodée éclairée <b>absorbe du CO₂</b>. À l'obscurité, la plante respire et rejette du CO₂ (tube 2), comme l'escargot (tube 4). Le tube 3 montre que la lumière seule ne modifie pas l'indicateur.</p>`,
+q:[`Expliquez le changement de couleur de chaque tube.`,`Quel est le rôle du tube 3 ?`]},
+{id:'stom',ch:'2.2',sim:'stom',t:`Observation des stomates`,
+obj:`Identifier les structures qui assurent les échanges gazeux entre la feuille et l'atmosphère.`,
+mat:`Feuille de poireau ou de géranium, pince, lame, lamelle, eau, microscope.`,
+p:[`Prélever un fragment d'épiderme inférieur de la feuille.`,`Le monter entre lame et lamelle dans une goutte d'eau.`,`Observer au microscope, à faible puis à fort grossissement.`,`Comparer des feuilles éclairées et des feuilles placées à l'obscurité.`],
+r:`<p>L'épiderme porte de nombreux stomates, formés de deux cellules de garde riches en chloroplastes qui délimitent un orifice, l'ostiole. L'ostiole est ouvert à la lumière, fermé à l'obscurité ou en cas de manque d'eau.</p>`,
+i:`<p>Les stomates sont les lieux des échanges gazeux : entrée du CO₂, sortie du O₂ et de la vapeur d'eau. L'ouverture résulte de la turgescence des cellules de garde ; la fermeture limite les pertes d'eau, mais aussi l'entrée du CO₂.</p>`,
+q:[`Sur quelle face de la feuille les stomates sont-ils les plus nombreux ? Quel en est l'intérêt ?`,`Expliquez comment la fermeture des stomates peut limiter la photosynthèse en période de sécheresse.`]},
+{id:'amidon',ch:'2.3',sim:'amidon',t:`Synthèse d'amidon à la lumière (expériences de Sachs)`,
+obj:`Montrer que la synthèse de matière organique (amidon) nécessite la lumière, la chlorophylle et le CO₂.`,
+mat:`Plante en pot (pélargonium, feuille panachée), papier aluminium (cache), flacon de potasse, alcool bouillant au bain-marie, eau iodée.`,
+p:[`Placer la plante 48 h à l'obscurité pour épuiser ses réserves d'amidon.`,`Selon l'expérience : couvrir une partie d'une feuille d'un cache, utiliser une feuille panachée, ou enfermer une feuille dans un flacon contenant de la potasse, qui absorbe le CO₂.`,`Éclairer la plante pendant plusieurs heures.`,`Décolorer les feuilles dans l'alcool bouillant, au bain-marie.`,`Les plonger dans l'eau iodée.`],
+r:`<p>Seules les zones éclairées, chlorophylliennes et en présence de CO₂ se colorent en bleu-noir.</p>`,
+i:`<p>L'eau iodée colore l'amidon en bleu-noir. La synthèse d'amidon exige la <b>lumière</b>, la <b>chlorophylle</b> et le <b>CO₂</b> : la plante chlorophyllienne est autotrophe. Bilan : 6 CO₂ + 12 H₂O → C₆H₁₂O₆ + 6 O₂ + 6 H₂O (énergie lumineuse, chlorophylle).</p>`,
+q:[`Pourquoi place-t-on la plante 48 h à l'obscurité avant l'expérience ?`,`Dégagez les trois conditions nécessaires à la synthèse d'amidon.`]},
+{id:'extract',ch:'2.4',t:`Extraction des pigments et fluorescence`,
+obj:`Extraire les pigments de la feuille et observer leurs propriétés optiques.`,
+mat:`Feuilles d'épinard, mortier, sable, alcool à 90° ou acétone, papier filtre, tube, lampe puissante.`,
+p:[`Broyer les feuilles avec un peu de sable et d'alcool.`,`Filtrer : on obtient la solution de chlorophylle brute.`,`Observer la solution par transparence, puis par réflexion sur fond noir, éclairée par une lumière intense.`],
+r:`<p>Par transparence, la solution est verte ; par réflexion, elle apparaît rouge sombre.</p>`,
+i:`<p>La lueur rouge, ou <b>fluorescence</b>, montre que les pigments absorbent l'énergie lumineuse : extraits de la cellule, ils en réémettent une partie sous forme de lumière rouge. Dans le chloroplaste, cette énergie est au contraire convertie en énergie chimique.</p>`,
+q:[`Pourquoi broie-t-on les feuilles avec de l'alcool ?`,`Que traduit la fluorescence rouge de la chlorophylle brute ?`]},
+{id:'chromato',ch:'2.4',sim:'chromato',t:`Séparation des pigments par chromatographie`,
+obj:`Séparer et identifier les pigments de la chlorophylle brute.`,
+mat:`Bande de papier Whatman, chlorophylle brute, solvant (éther de pétrole et acétone), éprouvette bouchée, capillaire.`,
+p:[`Déposer une goutte de chlorophylle brute à 2 cm du bas du papier ; sécher et recommencer plusieurs fois.`,`Placer le papier dans l'éprouvette contenant le solvant, sans immerger le dépôt.`,`Laisser migrer, puis retirer le papier quand le front du solvant approche du haut ; marquer le front.`,`Mesurer les distances et calculer les Rf.`],
+r:`<p>Quatre bandes : carotènes (orangé, en haut), xanthophylles (jaune), chlorophylle a (vert-bleu), chlorophylle b (vert-jaune).</p>`,
+i:`<p>Chaque pigment migre à une vitesse qui dépend de sa solubilité dans le solvant et de sa fixation sur le papier. Rf = distance parcourue par le pigment / distance parcourue par le solvant. La chlorophylle brute est un mélange de <b>chlorophylles</b> (a et b) et de <b>caroténoïdes</b> (carotènes, xanthophylles).</p>`,
+q:[`Calculez le Rf de chaque pigment.`,`Pourquoi la chlorophylle b migre-t-elle moins loin que les carotènes ?`]},
+{id:'spectre',ch:'2.4',sim:'spectre',t:`Spectre d'absorption des pigments`,
+obj:`Déterminer les radiations lumineuses absorbées par les pigments chlorophylliens.`,
+mat:`Spectroscope ou spectrophotomètre, source de lumière blanche, cuve contenant la solution de pigments.`,
+p:[`Observer le spectre de la lumière blanche au spectroscope.`,`Interposer la solution de chlorophylle brute et repérer les bandes sombres.`,`Mesurer l'absorbance de chaque pigment pour différentes longueurs d'onde au spectrophotomètre.`],
+r:`<p>Les chlorophylles absorbent surtout le bleu-violet (430 à 450 nm) et le rouge (640 à 680 nm) et très peu le vert. Les caroténoïdes absorbent le bleu et le bleu-vert (400 à 500 nm).</p>`,
+i:`<p>Les radiations vertes, peu absorbées, sont transmises ou réfléchies : d'où la couleur verte des feuilles. Seules les radiations absorbées peuvent être utilisées par la photosynthèse.</p>`,
+q:[`Quelles radiations sont les plus absorbées par la chlorophylle brute ?`,`Expliquez pourquoi les feuilles sont vertes.`]},
+{id:'engel',ch:'2.4',sim:'engel',t:`Expérience d'Engelmann : le spectre d'action`,
+obj:`Identifier les radiations efficaces pour la photosynthèse.`,
+mat:`Algue filamenteuse (Cladophora ou spirogyre), bactéries aérobies mobiles, prisme, microscope.`,
+p:[`Placer le filament d'algue dans une goutte d'eau contenant des bactéries aérobies, à l'abri du dioxygène de l'air.`,`Éclairer le filament avec un spectre obtenu à l'aide d'un prisme.`,`Observer la répartition des bactéries le long du filament.`],
+r:`<p>Les bactéries s'accumulent autour des zones éclairées en bleu-violet et en rouge ; elles sont rares dans le vert.</p>`,
+i:`<p>Les bactéries aérobies se rassemblent là où le dioxygène est le plus abondant, c'est-à-dire là où la photosynthèse est la plus intense. Le <b>spectre d'action</b> coïncide avec le <b>spectre d'absorption</b> des chlorophylles : ce sont les radiations absorbées par ces pigments qui sont utilisées.</p>`,
+q:[`Pourquoi utilise-t-on des bactéries aérobies ?`,`Comparez la répartition des bactéries au spectre d'absorption des chlorophylles. Concluez.`]},
+{id:'hill',ch:'2.5',sim:'hill',t:`Expérience de Hill (1937)`,
+obj:`Montrer que le dégagement d'O₂ est lié à l'oxydation de l'eau à la lumière et qu'il ne dépend pas du CO₂.`,
+mat:`Suspension de chloroplastes isolés dans un milieu sans CO₂, réactif de Hill (accepteur d'électrons : ions ferriques Fe³⁺), sonde à O₂, lampe.`,
+p:[`Placer la suspension de chloroplastes dans l'enceinte, sans CO₂.`,`Mesurer la teneur en O₂ à l'obscurité puis à la lumière.`,`Ajouter le réactif de Hill et mesurer de nouveau à la lumière.`],
+r:`<p>Le dégagement d'O₂ n'a lieu qu'en présence de lumière et d'un accepteur d'électrons ; les ions Fe³⁺ sont alors réduits en Fe²⁺.</p>`,
+i:`<p>À la lumière, les chloroplastes oxydent l'eau (<b>photolyse</b>) : 2 H₂O → O₂ + 4 H⁺ + 4 e⁻. Les électrons sont cédés à un accepteur : Fe³⁺ in vitro, NADP⁺ dans la cellule, qui devient NADPH,H⁺. Le dégagement d'O₂ ne nécessite pas de CO₂.</p>`,
+q:[`Quelles conditions sont nécessaires au dégagement d'O₂ par des chloroplastes isolés ?`,`Quel est le rôle du réactif de Hill ? Quelle molécule joue ce rôle dans la cellule ?`]},
+{id:'ruben',ch:'2.5',sim:'ruben',t:`Origine du dioxygène : Ruben et Kamen (1941)`,
+obj:`Déterminer si le dioxygène dégagé provient de l'eau ou du CO₂.`,
+mat:`Deux suspensions de chlorelles, eau marquée H₂¹⁸O, CO₂ marqué C¹⁸O₂ (sous forme d'hydrogénocarbonate), spectromètre de masse.`,
+p:[`Lot 1 : chlorelles dans H₂¹⁸O avec du CO₂ ordinaire.`,`Lot 2 : chlorelles dans de l'eau ordinaire avec du C¹⁸O₂.`,`Éclairer et analyser le dioxygène dégagé au spectromètre de masse.`],
+r:`<p>Le dioxygène dégagé est marqué (¹⁸O₂) seulement dans le lot 1.</p>`,
+i:`<p>Le dioxygène rejeté par la photosynthèse provient de la <b>photolyse de l'eau</b>, et non du CO₂. L'oxygène du CO₂ se retrouve dans la matière organique et dans l'eau formée.</p>`,
+q:[`D'où provient le dioxygène rejeté par la photosynthèse ? Justifiez.`,`Que devient l'oxygène du CO₂ ?`]},
+{id:'calvin',ch:'2.5',sim:'calvin',t:`Cycle de Calvin : marquage au ¹⁴CO₂`,
+obj:`Identifier la première molécule organique formée et les étapes de la fixation du CO₂.`,
+mat:`Suspension de chlorelles, ¹⁴CO₂ radioactif, alcool bouillant, chromatographie bidimensionnelle, autoradiographie.`,
+p:[`Éclairer les chlorelles et leur fournir du ¹⁴CO₂.`,`Tuer les algues dans l'alcool bouillant après des durées croissantes (quelques secondes à quelques minutes).`,`Séparer les molécules par chromatographie bidimensionnelle et repérer les molécules radioactives par autoradiographie.`,`Suivre les teneurs en APG et en RuBP lors du passage à l'obscurité ou d'une baisse du CO₂.`],
+r:`<p>Après 2 s, la radioactivité est surtout dans l'APG ; apparaissent ensuite les trioses phosphates, les hexoses phosphates, le RuBP, le saccharose et les acides aminés. À l'obscurité, l'APG augmente et le RuBP diminue ; sans CO₂, c'est l'inverse.</p>`,
+i:`<p>Le CO₂ est fixé sur le <b>RuBP</b> (C5) par la Rubisco, ce qui forme deux molécules d'<b>APG</b> (C3). L'APG est réduit en triose phosphate grâce à l'ATP et au NADPH,H⁺ produits à la lumière ; une partie des trioses régénère le RuBP, le reste forme les glucides. À l'obscurité, faute d'ATP et de NADPH,H⁺, l'APG n'est plus réduit et s'accumule, tandis que le RuBP n'est plus régénéré.</p>`,
+q:[`Quelle est la première molécule organique stable marquée ? Justifiez.`,`Expliquez l'accumulation de l'APG à l'obscurité.`]},
+{id:'arnon',ch:'2.5',sim:'arnon',t:`Expérience d'Arnon : phase claire et phase sombre`,
+obj:`Montrer que la fixation du CO₂ utilise des composés produits à la lumière.`,
+mat:`Chloroplastes isolés, ¹⁴CO₂, source lumineuse, compteur de radioactivité.`,
+p:[`Éclairer des chloroplastes en l'absence de CO₂.`,`Les placer ensuite à l'obscurité en présence de ¹⁴CO₂.`,`Mesurer la radioactivité incorporée dans la matière organique.`,`Comparer avec des chloroplastes non éclairés au préalable.`],
+r:`<p>Après un éclairement préalable, du ¹⁴CO₂ est fixé à l'obscurité pendant une courte durée, puis la fixation s'arrête. Sans éclairement préalable, il n'y a aucune fixation.</p>`,
+i:`<p>La photosynthèse comporte deux phases : la <b>phase photochimique</b> (claire), qui produit ATP et NADPH,H⁺ dans les thylakoïdes, et la <b>phase non photochimique</b> (sombre, cycle de Calvin), qui utilise ces composés pour réduire le CO₂ dans le stroma. La fixation s'arrête quand le stock d'ATP et de NADPH,H⁺ est épuisé.</p>`,
+q:[`Pourquoi la fixation du CO₂ s'arrête-t-elle après quelques minutes d'obscurité ?`,`Montrez que cette expérience prouve l'existence de deux phases dans la photosynthèse.`]},
+{id:'jagen',ch:'2.5',t:`Expérience de Jagendorf : gradient de protons et ATP`,
+obj:`Montrer que la synthèse d'ATP est couplée à un gradient de protons de part et d'autre de la membrane des thylakoïdes.`,
+mat:`Thylakoïdes isolés, tampons à pH 4 et à pH 8, ADP, phosphate inorganique (Pi), obscurité.`,
+p:[`Placer des thylakoïdes dans un milieu à pH 4 jusqu'à équilibre : l'intérieur des thylakoïdes devient acide.`,`Les transférer, à l'obscurité, dans un milieu à pH 8 contenant ADP et Pi.`,`Doser l'ATP formé.`,`Témoin : transfert dans un milieu à pH 4, sans différence de pH.`],
+r:`<p>De l'ATP est produit à l'obscurité uniquement lorsqu'il existe une différence de pH entre l'intérieur et l'extérieur des thylakoïdes.</p>`,
+i:`<p>Le retour des protons de l'intérieur du thylakoïde vers le stroma, à travers l'<b>ATP synthase</b>, fournit l'énergie de la phosphorylation : ADP + Pi → ATP. À la lumière, ce gradient est créé par la photolyse de l'eau et le transfert des électrons.</p>`,
+q:[`Pourquoi l'expérience est-elle réalisée à l'obscurité ?`,`Quel est le rôle de l'ATP synthase ?`]},
+{id:'pancreas',ch:'3.1',sim:'pancreas',t:`Ablation et greffe du pancréas`,
+obj:`Montrer le rôle du pancréas dans la régulation de la glycémie et le mode d'action hormonal de ce contrôle.`,
+mat:`Données historiques (Von Mering et Minkowski, 1889 ; Hédon), dosages de la glycémie et de la glycosurie.`,
+p:[`Mesurer la glycémie d'un chien normal.`,`Pratiquer l'ablation totale du pancréas et suivre la glycémie.`,`Greffer un fragment de pancréas sous la peau, sans connexion nerveuse, puis retirer le greffon.`,`Chez un autre animal privé de pancréas, injecter de l'insuline.`],
+r:`<p>L'ablation entraîne une hyperglycémie (plus de 3 g/L), une glycosurie, une polyurie, une soif intense et un amaigrissement. La greffe ou les injections d'insuline rétablissent une glycémie normale ; le retrait du greffon fait réapparaître l'hyperglycémie.</p>`,
+i:`<p>Le pancréas est indispensable au maintien de la glycémie autour de 1 g/L. Le greffon, sans connexion nerveuse, agit par voie sanguine : il sécrète une <b>hormone hypoglycémiante, l'insuline</b>. Au-delà du seuil rénal (environ 1,8 g/L), le glucose passe dans l'urine.</p>`,
+q:[`Relevez les symptômes observés après l'ablation du pancréas.`,`Montrez que le pancréas agit par voie sanguine.`]},
+{id:'ligature',ch:'3.1',t:`Ligature du canal pancréatique`,
+obj:`Déterminer quelles structures du pancréas interviennent dans la régulation de la glycémie.`,
+mat:`Données expérimentales, coupes histologiques de pancréas.`,
+p:[`Ligaturer le canal pancréatique d'un animal.`,`Suivre la digestion et la glycémie.`,`Observer au microscope une coupe du pancréas quelques semaines plus tard.`],
+r:`<p>Troubles digestifs, car le suc pancréatique n'atteint plus l'intestin, mais glycémie normale. Les acini dégénèrent ; les îlots de Langerhans restent intacts.</p>`,
+i:`<p>Le pancréas a une double fonction : <b>exocrine</b> (suc pancréatique produit par les acini) et <b>endocrine</b> (hormones). Les îlots de Langerhans contrôlent la glycémie : les cellules β sécrètent l'insuline, hypoglycémiante, et les cellules α le glucagon, hyperglycémiant.</p>`,
+q:[`Quelles sont les deux fonctions du pancréas ?`,`Que prouve l'absence de diabète après la ligature du canal pancréatique ?`]},
+{id:'hgpo',ch:'3.1',sim:'hgpo',t:`Test d'hyperglycémie provoquée par voie orale`,
+obj:`Comparer la régulation de la glycémie chez une personne saine et chez une personne diabétique.`,
+mat:`Sujets à jeun, 75 g de glucose dissous dans l'eau, lecteur de glycémie, dosages de l'insulinémie.`,
+p:[`Mesurer la glycémie à jeun.`,`Faire ingérer 75 g de glucose.`,`Mesurer la glycémie et l'insulinémie toutes les 30 minutes pendant 3 heures.`],
+r:`<p>Sujet sain : glycémie à jeun proche de 0,9 g/L, pic modéré puis retour à la normale en 2 à 3 heures, avec une forte hausse de l'insulinémie. Sujet diabétique de type 1 : glycémie élevée à jeun, forte hyperglycémie qui persiste, insulinémie très faible.</p>`,
+i:`<p>Chez le sujet sain, l'élévation de la glycémie stimule la sécrétion d'insuline, qui favorise l'utilisation du glucose et son stockage (glycogène du foie et des muscles) : la glycémie revient à sa valeur de référence. Chez le diabétique de type 1, l'absence d'insuline empêche cette régulation. On parle de diabète quand la glycémie à jeun atteint ou dépasse 1,26 g/L.</p>`,
+q:[`Comparez l'évolution de la glycémie et de l'insulinémie chez les deux sujets.`,`Expliquez l'origine de l'hyperglycémie chez le diabétique de type 1.`]},
+{id:'foie',ch:'3.1',sim:'foie',t:`Expérience du foie lavé (Claude Bernard, 1855)`,
+obj:`Montrer que le foie stocke le glucose sous forme de glycogène et le libère dans le sang.`,
+mat:`Foie frais d'un animal bien nourri, eau, liqueur de Fehling, eau iodée.`,
+p:[`Laver le foie par un courant d'eau injecté par la veine porte.`,`Tester le glucose dans l'eau de lavage à la liqueur de Fehling jusqu'à sa disparition.`,`Laisser le foie plusieurs heures à température ambiante.`,`Laver de nouveau et tester l'eau de lavage.`],
+r:`<p>Le glucose disparaît de l'eau de lavage, puis réapparaît après quelques heures. Un fragment de foie se colore en brun acajou à l'eau iodée, ce qui révèle le glycogène.</p>`,
+i:`<p>Le foie contient une réserve de <b>glycogène</b> qu'il hydrolyse en glucose (glycogénolyse) et libère dans le sang : c'est la <b>fonction glycogénique</b> du foie, qui intervient dans le maintien de la glycémie. Le stockage (glycogénogenèse) est stimulé par l'insuline, la libération par le glucagon.</p>`,
+q:[`Pourquoi le glucose disparaît-il de l'eau de lavage ?`,`D'où provient le glucose qui réapparaît après 24 h ?`]},
+{id:'fehling',ch:'3.1',t:`Tests d'identification : liqueur de Fehling et eau iodée`,
+obj:`Maîtriser les tests utilisés dans les expériences sur la glycémie.`,
+mat:`Liqueur de Fehling, solutions de glucose et d'amidon, fragment de foie, eau iodée, tubes à essai, bec Bunsen.`,
+p:[`Ajouter de la liqueur de Fehling à une solution de glucose, puis chauffer.`,`Faire de même avec de l'eau distillée : c'est le témoin.`,`Déposer de l'eau iodée sur un fragment de foie et sur de l'amidon.`],
+r:`<p>Glucose et Fehling à chaud : précipité rouge brique ; le témoin reste bleu. Glycogène et eau iodée : brun acajou ; amidon et eau iodée : bleu-noir.</p>`,
+i:`<p>Le glucose est un <b>sucre réducteur</b> : il réduit les ions cuivriques Cu²⁺ (bleus) en oxyde cuivreux Cu₂O (rouge brique). Ces tests qualitatifs permettent de détecter la glycosurie et les réserves glucidiques.</p>`,
+q:[`Quel est le rôle du tube témoin ?`,`Comment mettre en évidence la glycosurie chez un chien privé de pancréas ?`]},
+{id:'reflexe',ch:'3.2',t:`Le réflexe myotatique (réflexe rotulien)`,
+obj:`Identifier les éléments d'un arc réflexe.`,
+mat:`Marteau à réflexes, élève assis, jambes pendantes.`,
+p:[`Frapper légèrement le tendon rotulien, sous la rotule.`,`Observer la réponse.`,`Recommencer en demandant au sujet de concentrer son attention ailleurs, par exemple en serrant les mains.`],
+r:`<p>Extension brusque et involontaire de la jambe, due à la contraction du quadriceps, suivie d'un retour à la position initiale.</p>`,
+i:`<p>Le choc étire le quadriceps ; les <b>fuseaux neuromusculaires</b> (récepteurs) produisent un message nerveux conduit par la fibre sensitive jusqu'à la <b>moelle épinière</b> (centre nerveux), où il est transmis au motoneurone ; le message moteur provoque la contraction du muscle étiré (effecteur). Le réflexe myotatique est la contraction d'un muscle en réponse à son propre étirement : il est involontaire, rapide et inné.</p>`,
+q:[`Identifiez les éléments de l'arc réflexe mis en jeu.`,`Quel est le stimulus efficace du réflexe myotatique ?`]},
+{id:'grenouille',ch:'3.2',t:`Grenouille spinale et rôle de la moelle épinière`,
+obj:`Montrer que la moelle épinière est le centre nerveux de certains réflexes.`,
+mat:`Documents sur la grenouille spinale, acide acétique dilué, eau.`,
+p:[`Grenouille privée d'encéphale (spinale) et suspendue : tremper une patte dans l'acide dilué.`,`Recommencer après destruction de la moelle épinière.`,`Recommencer après section du nerf sciatique.`],
+r:`<p>La grenouille spinale retire sa patte ; après destruction de la moelle ou section du nerf, il n'y a plus de réponse.</p>`,
+i:`<p>L'encéphale n'est pas nécessaire à ce réflexe ; la <b>moelle épinière</b> en est le centre nerveux. L'arc réflexe comprend : récepteur (peau), voie sensitive, centre (moelle), voie motrice, effecteur (muscles). Le nerf, qui contient les voies sensitive et motrice, est indispensable.</p>`,
+q:[`Pourquoi utilise-t-on une grenouille spinale ?`,`Que montre la disparition du réflexe après destruction de la moelle épinière ?`]},
+{id:'magendie',ch:'3.2',sim:'magendie',t:`Section des racines rachidiennes (Magendie)`,
+obj:`Déterminer le rôle des racines dorsale et ventrale du nerf rachidien.`,
+mat:`Données expérimentales sur l'animal, schéma de la moelle épinière et des racines.`,
+p:[`Sectionner la racine dorsale ou la racine ventrale d'un nerf rachidien et observer le territoire innervé.`,`Stimuler le bout central (côté moelle), puis le bout périphérique de la racine sectionnée.`],
+r:`<p>Racine dorsale sectionnée : perte de la sensibilité ; réponse seulement si l'on stimule le bout central. Racine ventrale sectionnée : paralysie ; contraction seulement si l'on stimule le bout périphérique.</p>`,
+i:`<p>La racine dorsale est <b>sensitive</b> : elle conduit le message nerveux de la périphérie vers la moelle (sens centripète). La racine ventrale est <b>motrice</b> : elle conduit le message de la moelle vers les muscles (sens centrifuge). Le nerf rachidien est donc un nerf <b>mixte</b>.</p>`,
+q:[`Quel est le rôle de la racine dorsale ? de la racine ventrale ?`,`Pourquoi qualifie-t-on le nerf rachidien de nerf mixte ?`]},
+{id:'waller',ch:'3.2',t:`Dégénérescence wallérienne`,
+obj:`Localiser les corps cellulaires des neurones sensitifs et moteurs.`,
+mat:`Données expérimentales et coupes histologiques.`,
+p:[`Sectionner la racine dorsale entre le ganglion rachidien et la moelle, puis observer après quelques jours.`,`Sectionner la racine dorsale au-delà du ganglion, côté nerf.`,`Sectionner la racine ventrale.`],
+r:`<div class="scroll"><table class="t"><thead><tr><th>Section</th><th>Partie qui dégénère</th></tr></thead><tbody><tr><td>Racine dorsale, entre ganglion et moelle</td><td>Segment relié à la moelle</td></tr><tr><td>Racine dorsale, au-delà du ganglion</td><td>Segment périphérique</td></tr><tr><td>Racine ventrale</td><td>Segment périphérique</td></tr></tbody></table></div>`,
+i:`<p>Une fibre nerveuse séparée de son corps cellulaire dégénère. Les corps cellulaires des neurones sensitifs se trouvent donc dans le <b>ganglion rachidien</b>, ceux des neurones moteurs dans la <b>substance grise</b> (cornes antérieures) de la moelle épinière.</p>`,
+q:[`Où se trouvent les corps cellulaires des neurones sensitifs ? des neurones moteurs ?`,`Pourquoi une fibre séparée de son corps cellulaire dégénère-t-elle ?`]},
+{id:'potent',ch:'3.2',sim:'potent',t:`Potentiel de repos et potentiel d'action`,
+obj:`Caractériser le message nerveux et comparer la réponse d'une fibre isolée à celle d'un nerf.`,
+mat:`Nerf sciatique de grenouille ou fibre géante de calmar, stimulateur, électrodes, oscilloscope ou ExAO.`,
+p:[`Placer une microélectrode dans la fibre et une électrode de référence à l'extérieur : lire le potentiel de repos.`,`Appliquer des stimulations d'intensité croissante.`,`Enregistrer les réponses d'une fibre isolée, puis d'un nerf entier.`],
+r:`<p>Au repos, la face interne de la membrane est négative, vers −70 mV. Fibre : aucune réponse sous le seuil ; au-delà, un potentiel d'action d'amplitude constante, environ 100 mV. Nerf : l'amplitude de la réponse augmente avec l'intensité, entre un seuil et un maximum.</p>`,
+i:`<p>Le potentiel d'action est une inversion brève et locale de la polarisation de la membrane : dépolarisation, repolarisation, hyperpolarisation. La fibre obéit à la <b>loi du tout ou rien</b>. Le nerf est formé de nombreuses fibres de seuils différents : une intensité croissante <b>recrute</b> un nombre croissant de fibres, d'où une réponse globale graduée.</p>`,
+q:[`Comparez la réponse d'une fibre isolée et celle d'un nerf à des stimulations d'intensité croissante.`,`Décrivez les phases du potentiel d'action.`]},
+{id:'vitesse',ch:'3.2',sim:'vitesse',t:`Vitesse de propagation du message nerveux`,
+obj:`Calculer la vitesse de propagation du message nerveux le long d'un nerf.`,
+mat:`Nerf sciatique, stimulateur, deux électrodes réceptrices à des distances différentes, oscilloscope.`,
+p:[`Stimuler le nerf et enregistrer la réponse sur deux électrodes R₁ et R₂, situées à des distances d₁ et d₂ du point de stimulation.`,`Mesurer les temps de latence t₁ et t₂.`,`Calculer v = (d₂ − d₁) / (t₂ − t₁).`],
+r:`<p>La réponse apparaît plus tard sur l'électrode la plus éloignée du point de stimulation.</p>`,
+i:`<p>Le message nerveux se propage le long des fibres à vitesse constante. La vitesse est plus élevée dans les fibres de gros diamètre et dans les fibres myélinisées, où la conduction est saltatoire.</p>`,
+q:[`Calculez la vitesse de propagation à partir des données.`,`Pourquoi utilise-t-on la différence de deux latences plutôt qu'une seule latence ?`]},
+{id:'synapse',ch:'3.2',t:`Transmission synaptique : action du curare`,
+obj:`Montrer que la transmission du message du nerf au muscle se fait au niveau d'une synapse neuromusculaire.`,
+mat:`Préparation nerf-muscle de grenouille, curare, stimulateur.`,
+p:[`Stimuler le nerf et observer le muscle.`,`Placer la préparation dans une solution de curare.`,`Stimuler le nerf, puis stimuler directement le muscle.`],
+r:`<p>Après action du curare, la stimulation du nerf ne provoque plus de contraction, mais la stimulation directe du muscle en provoque une. Le nerf conduit toujours le message.</p>`,
+i:`<p>Le curare agit au niveau de la <b>jonction neuromusculaire</b> : il se fixe sur les récepteurs à l'acétylcholine de la membrane du muscle et bloque la transmission. Celle-ci est chimique : un neurotransmetteur, l'<b>acétylcholine</b>, libéré par la terminaison nerveuse, se fixe sur des récepteurs spécifiques de la membrane postsynaptique.</p>`,
+q:[`Où le curare agit-il ? Justifiez à l'aide des résultats.`,`Pourquoi dit-on que la transmission neuromusculaire est chimique ?`]}
+];
+
+/* ---------- Application ---------- */
+const $=s=>document.querySelector(s),html=document.documentElement;
+let cur=-1;
+const norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const chNum=e=>Object.keys(CH).filter(k=>k[0]==e.ch[0]).indexOf(e.ch)+1;
+function drawNav(){const f=norm($('#q').value.trim());let s='',lu='',lc='';
+ EXP.forEach((e,i)=>{if(f&&!norm(e.t+' '+CH[e.ch]).includes(f))return;const u=e.ch[0];
+  if(u!=lu){s+=`<p class="uh" style="--uc:${UN[u][1]}">Unité ${u}<br><span>${UN[u][0]}</span></p>`;lu=u;lc=''}
+  if(e.ch!=lc){s+=`<p class="ch">${CH[e.ch]}</p>`;lc=e.ch}
+  s+=`<button type="button" class="it" style="--uc:${UN[u][1]}" data-i="${i}"${i==cur?' aria-current="page"':''}><i class="dot${e.sim?'':' st'}"></i><span>${e.t}</span></button>`});
+ $('#nav').innerHTML=s||`<p class="ch">Aucune expérience ne correspond à cette recherche.</p>`}
+const rv=(t,b)=>`<section class="reveal"><button type="button" class="rv" aria-expanded="false">${t}</button><div class="rvb" hidden>${b}</div></section>`;
+function show(i){cleanup();cur=i;const e=EXP[i],u=e.ch[0],M=$('#main'),pv=EXP[i-1],nx=EXP[i+1];M.style.setProperty('--uc',UN[u][1]);
+ M.innerHTML=`<p class="crumb">Unité ${u}, chapitre ${chNum(e)} : ${CH[e.ch]}</p><h1>${e.t}</h1><p class="obj"><b>Objectif.</b> ${e.obj}</p>
+ <div class="lay"><section class="proto"><h2>Matériel</h2><p>${e.mat}</p><h2>Protocole</h2><ol>${e.p.map(x=>`<li>${x}</li>`).join('')}</ol></section>${e.sim?`<section class="bench" aria-label="Simulation"><h2>Simulation</h2><div class="sim"></div></section>`:''}</div>
+ ${rv('Résultats',e.r)}${rv('Interprétation et conclusion',e.i)}
+ <section class="qs"><h2>Questions pour la classe</h2><ol>${e.q.map(x=>`<li>${x}</li>`).join('')}</ol></section>
+ <nav class="pn" aria-label="Expériences voisines">${pv?`<a class="b ghost" href="#${pv.id}"><span>Précédente</span>${pv.t}</a>`:'<i></i>'}${nx?`<a class="b ghost" href="#${nx.id}" style="text-align:right"><span>Suivante</span>${nx.t}</a>`:''}</nav>`;
+ if(e.sim){const el=M.querySelector('.sim');try{SIMS[e.sim](el)}catch(err){el.innerHTML=`<p>La simulation n'a pas pu démarrer. Rechargez la page.</p>`;console.error(err)}}
+ document.title=e.t+' | Laboratoire virtuel SVT';drawNav();window.scrollTo(0,0)}
+function home(){cleanup();cur=-1;const M=$('#main');M.style.removeProperty('--uc');
+ const nS=EXP.filter(e=>e.sim).length;
+ M.innerHTML=`<section class="hero"><h1>Laboratoire virtuel de SVT</h1><p class="lead">Les ${EXP.length} expériences du programme de 1<sup>re</sup> année du baccalauréat, Sciences expérimentales, à projeter pendant la séance, dont ${nS} simulations manipulables. Pour chacune : matériel, protocole, puis résultats et interprétation dévoilés au moment choisi.</p><p class="meta">Lycée qualifiant Abdesslam Ammer, Salé. Pr. EL Hassouni Mohamed. Année scolaire 2026-2027.</p></section>
+ <div class="units">${['1','2','3'].map(u=>`<section class="unit" style="--uc:${UN[u][1]}"><h2>Unité ${u}</h2><p class="un">${UN[u][0]}</p>${Object.keys(CH).filter(k=>k[0]==u).map(k=>`<h3>${CH[k]}</h3><ul>${EXP.filter(e=>e.ch==k).map(e=>`<li><i class="dot${e.sim?'':' st'}"></i><a href="#${e.id}">${e.t}</a></li>`).join('')}</ul>`).join('')}</section>`).join('')}</div>
+ <section class="how"><h2>Utilisation en classe</h2><p>Activez « Grand écran » pour la projection. Présentez le protocole, laissez les élèves formuler leurs hypothèses, manipulez la simulation, puis dévoilez les résultats et l'interprétation.</p><p>Les flèches gauche et droite du clavier passent d'une expérience à l'autre. Cercle plein : simulation interactive. Cercle vide : étude de documents.</p></section>`;
+ document.title='Laboratoire virtuel SVT, 1re Bac Sciences expérimentales';drawNav();window.scrollTo(0,0)}
+const side=$('#side'),scrim=$('#scrim');
+function closeSide(){side.classList.remove('open');scrim.hidden=true;$('#menu').setAttribute('aria-expanded','false')}
+function route(){const id=decodeURIComponent(location.hash.slice(1)),i=EXP.findIndex(e=>e.id==id);closeSide();i<0?home():show(i)}
+addEventListener('hashchange',route);
+$('#nav').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)location.hash=EXP[+b.dataset.i].id});
+$('#q').addEventListener('input',drawNav);
+$('#main').addEventListener('click',e=>{const b=e.target.closest('.rv');if(!b)return;const o=b.getAttribute('aria-expanded')!='true';b.setAttribute('aria-expanded',o);b.nextElementSibling.hidden=!o});
+$('#home').addEventListener('click',()=>{if(location.hash&&location.hash!='#')location.hash='';else home()});
+$('#menu').addEventListener('click',()=>{const o=!side.classList.contains('open');side.classList.toggle('open',o);scrim.hidden=!o;$('#menu').setAttribute('aria-expanded',o)});
+scrim.addEventListener('click',closeSide);
+const store={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+function setBig(on){html.classList.toggle('big',on);$('#big').setAttribute('aria-pressed',on);store.set('svt-big',on?'1':'0')}
+$('#big').addEventListener('click',()=>setBig(!html.classList.contains('big')));
+const isDark=()=>html.dataset.theme?html.dataset.theme=='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+const themeLabel=()=>{$('#theme').textContent=isDark()?'Thème clair':'Thème sombre'};
+$('#theme').addEventListener('click',()=>{html.dataset.theme=isDark()?'light':'dark';store.set('svt-theme',html.dataset.theme);themeLabel()});
+const sv=store.get('svt-theme');if(sv)html.dataset.theme=sv;themeLabel();if(store.get('svt-big')=='1')setBig(true);
+addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('input,select,textarea')||e.altKey||e.ctrlKey||e.metaKey)return;
+ if(e.key=='ArrowRight'&&cur<EXP.length-1)location.hash=EXP[cur+1].id;else if(e.key=='ArrowLeft'&&cur>0)location.hash=EXP[cur-1].id;else if(e.key=='Escape')closeSide()});
+route();
+</script>
+</body>
+</html>
